@@ -1,0 +1,77 @@
+# config/preprocessing_config.yaml
+# preprocessing_config.yaml
+preprocessing:
+  input_file: "cleaned_data.csv"
+  output_file: "preprocessed_data.csv"
+
+  steps:
+    panel_structure:
+      entity_col: "country"
+      time_col: "year"
+      sort_by: ["country", "year"]
+
+    transformations:
+      per_capita:
+        enabled: true
+        variables: ["emissions", "gdp", "energy_use"]
+        population_col: "population"
+
+      lagged_variables:
+        enabled: true
+        variables: ["emissions", "gdp", "renewable_pct"]
+        lags: [1, 2]
+
+      differences:
+        enabled: true
+        variables: ["emissions", "gdp"]
+        prefix: "delta_"
+
+      log_transforms:
+        enabled: true
+        variables: ["emissions", "gdp"]
+        epsilon: 1e-10
+
+      standardization:
+        enabled: false
+        method: "within_entity"  # or "global"
+        variables: ["emissions_pc", "gdp_pc"]
+
+    missing_data:
+      method: "ffill_bfill"  # "interpolate", "drop"
+      max_gap_years: 3
+
+    interaction_terms:
+      enabled: false
+      interactions:
+        - ["gdp_pc", "renewable_pct"]
+        - ["energy_use", "mean_temp"]
+
+    splitting:
+      test_years: 5
+      validation_years: 3
+
+    output:
+      save_intermediate: false
+      format: "csv"
+      include_index: true
+
+assumption_tests:
+  stationarity:
+    tests: ["adf", "kpss"]
+    variables: ["emissions_pc", "delta_emissions"]
+    significance_level: 0.05
+
+  cross_sectional:
+    test: "pesaran_cd"
+    variables: ["emissions_pc"]
+
+  structural_breaks:
+    test: "chow"
+    break_years: [1997, 2008, 2020]
+
+  heteroskedasticity:
+    test: "white"
+
+  autocorrelation:
+    test: "durbin_watson"
+    max_lag: 2

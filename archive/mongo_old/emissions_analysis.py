@@ -9,7 +9,7 @@ import sys
 
 class EmissionsAnalyzer:
     def __init__(self):
-        self.data_dir = Path(r"C:\python\project_programming_for_ai\mongo\data\development_analysis")
+        self.data_dir = Path(r"/mongo/data/development_analysis")
         self.plots_dir = Path("plots")
         self.output_file = "emissions_analysis.txt"
         self.df = None

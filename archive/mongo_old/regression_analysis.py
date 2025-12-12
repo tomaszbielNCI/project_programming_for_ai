@@ -11,7 +11,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 
-DATA_DIR = Path(r"C:\python\project_programming_for_ai\mongo\data\development_analysis")
+DATA_DIR = Path(r"/mongo/data/development_analysis")
 OUT_DIR = Path(__file__).parent / "ml_output"
 
 def list_csvs(p: Path) -> list:
@@ -202,7 +202,7 @@ def main():
             report_lines.append(f"Error: {e}")
             report_lines.append("")
 
-    report_path = OUT_DIR / "summary.txt"
+    report_path = OUT_DIR / "summary.countries_of_interest.txt"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("\n".join(report_lines))
 

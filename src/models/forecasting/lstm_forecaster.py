@@ -1,4 +1,7 @@
 # src/models/forecasting/lstm_forecaster.py
+
+###  KROK 2: LSTM Forecaster (question 2 + 4)
+
 import torch
 import torch.nn as nn
 import torch.optim as optim

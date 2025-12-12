@@ -140,7 +140,7 @@ def main():
     indicators = get_energy_climate_indicators()
     
     # Create output directory if it doesn't exist
-    output_dir = '../archive/data'
+    output_dir = '../data'
     os.makedirs(output_dir, exist_ok=True)
     
     # Generate timestamp for filename

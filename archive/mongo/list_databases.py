@@ -12,7 +12,7 @@ def load_mongodb_credentials():
         password = os.getenv('MONGODB_PASSWORD')
         
         # If not in environment, try to read from file in the same directory
-        password_file = os.path.join(script_dir, 'mongo_password.txt')
+        password_file = os.path.join(script_dir, 'mongo_password.countries_of_interest.txt')
         if not password and os.path.exists(password_file):
             with open(password_file, 'r', encoding='utf-8') as f:
                 password = f.read().strip()
@@ -79,7 +79,7 @@ def main():
         print_safe("\nTroubleshooting:")
         print_safe("1. Check your internet connection")
         print_safe("2. Verify your IP is whitelisted in MongoDB Atlas")
-        print_safe("3. Check your credentials in mongo_password.txt")
+        print_safe("3. Check your credentials in mongo_password.countries_of_interest.txt")
     finally:
         if 'client' in locals():
             client.close()

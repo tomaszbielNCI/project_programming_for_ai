@@ -8,7 +8,7 @@ plt.style.use('seaborn-v0_8')
 sns.set_theme(style="whitegrid")  # Using seaborn's theming system
 
 # Rest of your code remains the same
-base_path = Path(r'C:\python\project_programming_for_ai\mongo\data\development_analysis')
+base_path = Path(r'/mongo/data/development_analysis')
 df_clean = pd.read_csv(base_path / 'temperature_clean.csv')
 df_raw = pd.read_csv(base_path / 'temperature_raw.csv')
 

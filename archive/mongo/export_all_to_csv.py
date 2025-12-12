@@ -15,7 +15,7 @@ def load_mongodb_credentials():
         password = os.getenv('MONGODB_PASSWORD')
         
         # If not in environment, try to read from file in the same directory
-        password_file = os.path.join(script_dir, 'mongo_password.txt')
+        password_file = os.path.join(script_dir, 'mongo_password.countries_of_interest.txt')
         if not password and os.path.exists(password_file):
             with open(password_file, 'r', encoding='utf-8') as f:
                 password = f.read().strip()

@@ -5,7 +5,7 @@ import sys
 import pandas as pd
 import numpy as np
 
-DATA_DIR = Path(r"C:\python\project_programming_for_ai\mongo\data\development_analysis")
+DATA_DIR = Path(r"/mongo/data/development_analysis")
 OUT_DIR = Path(__file__).parent / "summary_output"
 
 
@@ -169,7 +169,7 @@ def main():
         print(f"No CSV files found in {DATA_DIR}")
         sys.exit(0)
 
-    report_path = OUT_DIR / "data_summary.txt"
+    report_path = OUT_DIR / "data_summary.countries_of_interest.txt"
     all_lines = []
     all_lines.append("DATA SUMMARY REPORT")
     all_lines.append(f"Folder: {DATA_DIR}")

@@ -1,4 +1,4 @@
-# próba2.py
+# test_data_IO.py
 from src.loaders.data_IO import DataIO
 import pandas as pd
 from dotenv import load_dotenv

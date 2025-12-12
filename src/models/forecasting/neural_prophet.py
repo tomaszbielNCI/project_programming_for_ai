@@ -1,4 +1,7 @@
 # src/models/forecasting/neural_prophet.py
+
+## 📦 NeuralProphet (question 5)
+
 import pandas as pd
 from ..base_model import BaseAIModel
 

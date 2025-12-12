@@ -11,8 +11,8 @@ if sys.stdout.encoding != 'utf-8':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # Wczytaj dane
-df_raw = pd.read_csv('../temp_data/temperature_raw.csv')
-df_clean = pd.read_csv('../temp_data/temperature_clean.csv')
+df_raw = pd.read_csv('../../temp_data/temperature_raw.csv')
+df_clean = pd.read_csv('../../temp_data/exports/development_analysis/temperature_clean.csv')
 
 # Wyciągnij kolumnę z anomaliami temperaturowymi
 raw_data = df_raw['temp_anomaly'].dropna().values

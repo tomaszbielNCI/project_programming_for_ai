@@ -1,4 +1,6 @@
 # src/models/feature_importance/shap_analyzer.py
+## 📦 step 5: SHAP Analyzer (question 1)
+
 import numpy as np
 import pandas as pd
 from ..base_model import BaseAIModel
