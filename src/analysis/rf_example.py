@@ -107,7 +107,7 @@ def load_data():
         print(f"Error loading data: {e}")
         sys.exit(1)
 
-
+'''
 def prepare_data(data, include_temp=True):
     """Prepare data for modeling.
     
@@ -151,6 +151,43 @@ def prepare_data(data, include_temp=True):
     # Print dataset information
     print(f"\nUsing features: {features}")
     print(f"Final dataset size: {len(X)} complete records")
+
+    return X_train, X_test, y_train, y_test, features
+'''
+def prepare_data(data, include_temp=True, split_year=2010):
+    print("\nPreparing data...")
+
+    base_features = ['energy_use', 'population', 'renewable_pct', 'gdp']
+    if include_temp:
+        features = base_features + ['mean_temp']
+    else:
+        features = base_features
+
+    target = 'emissions'
+
+    # enforce year sort
+    data = data.sort_values(["country", "year"]).reset_index(drop=True)
+
+    # select only columns needed
+    df = data[features + [target, "year"]].copy()
+
+    # drop missing
+    df = df.dropna()
+
+    print(f"Total df after cleaning: {len(df)} rows")
+
+    # time-based split
+    train_df = df[df["year"] <= split_year]
+    test_df  = df[df["year"] > split_year]
+
+    print(f"Train: {len(train_df)} rows ({train_df.year.min()}–{train_df.year.max()})")
+    print(f"Test:  {len(test_df)} rows ({test_df.year.min()}–{test_df.year.max()})")
+
+    X_train = train_df[features]
+    y_train = train_df[target]
+
+    X_test = test_df[features]
+    y_test = test_df[target]
 
     return X_train, X_test, y_train, y_test, features
 

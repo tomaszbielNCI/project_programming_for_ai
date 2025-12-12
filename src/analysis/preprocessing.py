@@ -3,13 +3,6 @@
 Panel Data Preprocessing Module
 Transforms cleaned data into panel data format with proper transformations
 for time-series and cross-sectional analysis.
-
-Key transformations:
-1. Panel structure setup
-2. Time-series transformations (lags, differences)
-3. Per capita calculations
-4. Standardization and normalization
-5. Missing data handling for panel analysis
 """
 
 from src.loaders.data_IO import DataIO
@@ -17,6 +10,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
+import os
 
 
 class PanelDataPreprocessor:
@@ -31,56 +25,6 @@ class PanelDataPreprocessor:
         """
         self.data_io = data_io or DataIO()
         self.df = None
-        self.panel_df = None
-
-    def load_data(self, source: str = 'cleaned_data.csv') -> pd.DataFrame:
-        """
-        Load cleaned data from CSV.
-
-        Args:
-            source: Path to cleaned data CSV
-
-        Returns:
-            Loaded DataFrame
-        """
-        # TODO: Implement data loading with proper error handling
-        pass
-
-    def set_panel_structure(self, df: pd.DataFrame,
-                            entity_col: str = 'country',
-                            time_col: str = 'year') -> pd.DataFrame:
-        """
-        Set panel data structure with multi-index.
-
-        Args:
-            df: Input DataFrame
-            entity_col: Column name for entities (countries)
-            time_col: Column name for time period
-
-        Returns:
-            DataFrame with panel structure
-        """
-        # TODO: Implement panel structure setup
-        # - Sort by entity and time
-        # - Set multi-index if needed
-        # - Ensure continuous time periods
-        pass
-
-    def calculate_per_capita_variables(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Calculate per capita versions of variables.
-
-        Args:
-            df: Input DataFrame with population column
-
-        Returns:
-            DataFrame with per capita variables added
-        """
-        # TODO: Implement per capita calculations
-        # emissions_pc = emissions / population
-        # gdp_pc = gdp / population
-        # energy_use_pc = energy_use / population
-        pass
 
     def create_lagged_variables(self, df: pd.DataFrame,
                                 variables: List[str],
@@ -261,6 +205,42 @@ class PanelDataPreprocessor:
         pass
 
 
+def preprocess_data():
+    """Function for data preprocessing - analogous to clean_data() in cleaning.py"""
+
+    # Initialize DataIO
+    data_io = DataIO()
+
+    # Load data
+    print("Loading data from cleaned_data.csv...")
+    df = data_io.from_csv("cleaned_data.csv").load()
+    print(f"Loaded {len(df)} rows of data.")
+
+    # Initialize preprocessor
+    preprocessor = PanelDataPreprocessor(data_io)
+
+    # Basic preprocessing steps (to be implemented)
+    print("\nPerforming preprocessing...")
+
+    # Example transformations (to be implemented)
+    # 1. Add per capita calculations
+    # 2. Create lagged variables
+    # 3. Handle missing data
+
+    # For now, just copy the data
+    processed_df = df.copy()
+
+    # Information about the resulting dataset
+    print(f"\nFinal preprocessed dataset contains {len(processed_df)} rows and {len(processed_df.columns)} columns")
+
+    # Save to CSV file
+    print("\nSaving preprocessed data...")
+    save_path = data_io.save(processed_df, target='csv', name='preprocessed_data')
+    print(f"Data saved to: {save_path}")
+
+    return processed_df
+
+
 # Helper functions for specific tests
 def prepare_for_stationarity_tests(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -308,22 +288,8 @@ def prepare_for_structural_break_tests(df: pd.DataFrame,
 
 
 if __name__ == "__main__":
-    """Example usage"""
-    preprocessor = PanelDataPreprocessor()
+    processed_data = preprocess_data()
 
-    # Run full preprocessing
-    preprocessed_df = preprocessor.run_full_preprocessing(
-        input_file='cleaned_data.csv',
-        output_file='preprocessed_data.csv',
-        config={
-            'lags': [1, 2],
-            'per_capita_vars': ['emissions', 'gdp', 'energy_use'],
-            'diff_vars': ['emissions', 'gdp'],
-            'log_transform': ['emissions', 'gdp'],
-            'standardize_within': True,
-            'test_years': 5
-        }
-    )
-
-    print(f"Preprocessing complete. Shape: {preprocessed_df.shape}")
-    print(f"Columns: {list(preprocessed_df.columns)}")
+    # Display sample data
+    print("\nSample 5 rows of preprocessed data:")
+    print(processed_data.head())
