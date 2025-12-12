@@ -35,7 +35,11 @@ env/
 
 # Sensitive data
 mongo_atlas_password.txt
+archive/mongo/mongo_password.txt
 
 # Database
 *.db
 *.sqlite3
+
+# Archive folder
+/archive/
