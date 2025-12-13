@@ -12,6 +12,7 @@ Sequence of commands from IPython session:
 9. filtered_df = df[df['mean_temp'].notna()].copy()
 10. columns_to_keep = ['country', 'year', 'population', 'energy_use', 'emissions', 'renewable_pct', 'mean_temp', 'gdp']
 11. clean_df = filtered_df[columns_to_keep].copy()
+!!! clean_df = data_io.from_csv("cleaned_data.csv").load()
 12. data_io.save(clean_df, target='csv', name='cleaned_data')
 13. temp_by_year = df[df['mean_temp'].notna()].groupby('year').size().reset_index(name='count')
 14. latest_year = df[df['mean_temp'].notna()]['year'].max()
@@ -21,6 +22,11 @@ Sequence of commands from IPython session:
     set_original = set(original_countries)
     set_cleaned = set(cleaned_countries)
     missing_countries = set_original - set_cleaned
+    columns = ['population', 'energy_use', 'emissions', 'renewable_pct', 'gdp']
+    numeric_df = df[columns]
+    correlation_matrix = numeric_df.corr()
+    correlation_matrix
+
 """
 
 from src.loaders.data_IO import DataIO
