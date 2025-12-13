@@ -326,46 +326,30 @@ class PanelDataPreprocessor:
         return save_path
 
     def run_full_preprocessing(self,
-                             input_file: str = 'cleaned_data.csv',
-                             output_file: str = 'preprocessed_data.csv',
-                             config: Optional[Dict] = None) -> pd.DataFrame:
+                               input_file: str = 'cleaned_data.csv',
+                               output_file: str = 'preprocessed_data.csv',
+                               config: Optional[Dict] = None) -> pd.DataFrame:
         """
         Run complete preprocessing pipeline.
-
-        Args:
-            input_file: Input data file (default: 'cleaned_data.csv')
-            output_file: Output data file (default: 'preprocessed_data.csv')
-            config: Configuration dictionary for preprocessing steps. If None, uses defaults.
-                   Example:
-                   {
-                       'variables': ['gdp', 'emissions', 'energy_use', 'population'],
-                       'lags': [1, 2],
-                       'create_differences': True,
-                       'create_logs': True,
-                       'missing_data_method': 'ffill_bfill',  # 'ffill_bfill', 'interpolate', or 'drop'
-                       'check_balance': True
-                   }
-
-        Returns:
-            Fully preprocessed DataFrame
         """
         # Set default config if none provided
         if config is None:
             config = {
-                'variables': self.DEFAULT_VARIABLES,
+                'variables': ['emissions', 'energy_use', 'gdp', 'population'],  # Bez mean_temp
                 'lags': [1, 2],
                 'create_differences': True,
                 'create_logs': True,
-                'missing_data_method': 'ffill_bfill',
+                'missing_data_method': 'interpolate',  # Zmienione z 'ffill_bfill'
                 'check_balance': True
             }
-            
+
         print("Starting data preprocessing...")
-        
-        # 1. Load data
+
+        # 1. Load data - POPRAWIONE
         print(f"Loading data from {input_file}")
-        df = self.data_io.load_data(input_file)
-        
+        self.data_io.from_csv(input_file)
+        df = self.data_io.load()
+
         # 2. Create lagged variables
         print("\nCreating lagged variables...")
         df = self.create_lagged_variables(
@@ -373,7 +357,7 @@ class PanelDataPreprocessor:
             variables=config.get('variables'),
             lags=config.get('lags', [1, 2])
         )
-        
+
         # 3. Create differences if requested
         if config.get('create_differences', True):
             print("\nCreating first differences...")
@@ -381,7 +365,7 @@ class PanelDataPreprocessor:
                 df,
                 variables=config.get('variables')
             )
-        
+
         # 4. Create log transformations if requested
         if config.get('create_logs', True):
             print("\nCreating log transformations...")
@@ -389,66 +373,45 @@ class PanelDataPreprocessor:
                 df,
                 variables=config.get('variables')
             )
-        
+
         # 5. Handle missing data
-        missing_method = config.get('missing_data_method', 'ffill_bfill')
+        missing_method = config.get('missing_data_method', 'interpolate')  # Zmienione
         print(f"\nHandling missing data using method: {missing_method}")
         df = self.handle_missing_panel_data(df, method=missing_method)
-        
+
         # 6. Check panel balance if requested
         if config.get('check_balance', True):
             print("\nChecking panel balance...")
             balance_info = self.check_panel_balance(df)
-            
-            # If panel is unbalanced, show some missing entries
+
             if not balance_info['is_balanced'] and not balance_info['missing_entries'].empty:
                 print("\nSample of missing entries:")
                 print(balance_info['missing_entries'].head())
-        
+
         # 7. Save preprocessed data
         if output_file:
             output_path = self.save_preprocessed_data(df, output_file.replace('.csv', ''))
             print(f"\nPreprocessing complete. Data saved to: {output_path}")
-        
+
         return df
 
 
 def preprocess_data():
     """Function for data preprocessing - analogous to clean_data() in cleaning.py"""
-
     # Initialize DataIO
     data_io = DataIO()
-
-    # Load data
-    print("Loading data from cleaned_data.csv...")
-    data_io.from_csv("cleaned_data.csv")
-    df = data_io.load()
-    print(f"Loaded {len(df)} rows of data.")
 
     # Initialize preprocessor
     preprocessor = PanelDataPreprocessor(data_io)
 
-    # Basic preprocessing steps (to be implemented)
-    print("\nPerforming preprocessing...")
-
-    # Example transformations (to be implemented)
-    # 1. Add per capita calculations
-    # 2. Create lagged variables
-    # 3. Handle missing data
-
-    # For now, just copy the data
-    processed_df = df.copy()
-
-    # Information about the resulting dataset
-    print(f"\nFinal preprocessed dataset contains {len(processed_df)} rows and {len(processed_df.columns)} columns")
-
-    # Save to CSV file
-    print("\nSaving preprocessed data...")
-    save_path = data_io.save(processed_df, target='csv', name='preprocessed_data')
-    print(f"Data saved to: {save_path}")
+    # Run full preprocessing pipeline
+    print("Starting full preprocessing pipeline...")
+    processed_df = preprocessor.run_full_preprocessing(
+        input_file="cleaned_data.csv",
+        output_file="preprocessed_data.csv"
+    )
 
     return processed_df
-
 
 
 if __name__ == "__main__":
@@ -457,3 +420,8 @@ if __name__ == "__main__":
     # Display sample data
     print("\nSample 5 rows of preprocessed data:")
     print(processed_data.head())
+
+    # Sprawdź jakie kolumny masz
+    print(f"\nColumns in processed data: {list(processed_data.columns)}")
+    print(f"Number of rows: {len(processed_data)}")
+    print(f"Number of countries: {processed_data['country'].nunique()}")
