@@ -49,3 +49,6 @@ ENV/
 
 # NeuralProphet
 lightning_logs/
+
+# Environment variables
+.env
