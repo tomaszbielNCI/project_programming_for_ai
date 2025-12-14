@@ -1,0 +1,43 @@
+================================================================================
+EMISSIONS PREDICTION - RANDOM FOREST ANALYSIS
+================================================================================
+
+Run ID: run_024
+Timestamp: 2025-12-13 15:37:21
+
+MODEL PERFORMANCE:
+----------------------------------------
+R² Score:        -8.1277
+MSE:             4.39
+MAE:             0.53
+
+FEATURES USED:
+----------------------------------------
+ 1. energy_use_diff
+ 2. population_diff
+ 3. renewable_pct_diff
+ 4. gdp_diff
+ 5. mean_temp
+
+FEATURE IMPORTANCE:
+----------------------------------------
+1. energy_use_diff: 0.550303
+2. population_diff: 0.201108
+3. gdp_diff: 0.154575
+4. mean_temp: 0.091889
+5. renewable_pct_diff: 0.002125
+
+PREDICTION SUMMARY:
+----------------------------------------
+Test samples:    402
+Mean actual:     -0.04
+Mean predicted:  -0.01
+Mean error:      -0.03
+
+TOP 5 PREDICTIONS (Actual vs Predicted):
+----------------------------------------
+Sample 305: Actual=   4.0 | Pred= -23.8 | Error= 27.8
+Sample 342: Actual=  -0.1 | Pred=  16.2 | Error= 16.3
+Sample 139: Actual=  -0.3 | Pred=  15.2 | Error= 15.5
+Sample 306: Actual=  -4.2 | Pred=   7.3 | Error= 11.5
+Sample 207: Actual=  -6.7 | Pred=   2.2 | Error=  8.8
