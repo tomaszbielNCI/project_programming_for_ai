@@ -12,6 +12,14 @@ missing_analysis = clean_df.groupby('country').apply(
     lambda x: x.select_dtypes(include='number').isna().sum()
 )
 clean_df.isna().sum().sort_values(ascending=False)
+In [12]: cols = ['emissions', 'population', 'gdp', 'energy_use', 'renewable_pct']
+    ...: cols = [c for c in cols if c in preprocessed_df.columns]  # zabezpieczenie
+    ...: corr_levels = preprocessed_df[cols].corr(numeric_only=True)
+
+In [13]: diff_cols = ['emissions_diff', 'population_diff', 'gdp_diff', 'energy_use_diff', 'renewable_pct_diff']
+    ...: diff_cols = [c for c in diff_cols if c in preprocessed_df.columns]
+    ...: corr_diffs = preprocessed_df[diff_cols].corr(numeric_only=True)
+
 
 """
 
@@ -335,11 +343,11 @@ class PanelDataPreprocessor:
         # Set default config if none provided
         if config is None:
             config = {
-                'variables': ['emissions', 'energy_use', 'gdp', 'population'],  # Bez mean_temp
-                'lags': [1, 2],
+                'variables': ['emissions', 'energy_use', 'gdp', 'population', 'renewable_pct'],
+                'lags': [1, 2],  # Include both lag-1 and lag-2
                 'create_differences': True,
                 'create_logs': True,
-                'missing_data_method': 'interpolate',  # Zmienione z 'ffill_bfill'
+                'missing_data_method': 'interpolate',
                 'check_balance': True
             }
 
@@ -350,32 +358,41 @@ class PanelDataPreprocessor:
         self.data_io.from_csv(input_file)
         df = self.data_io.load()
 
-        # 2. Create lagged variables
-        print("\nCreating lagged variables...")
+        # 2. Create base lagged variables
+        print("\nCreating base lagged variables...")
         df = self.create_lagged_variables(
             df,
-            variables=config.get('variables'),
-            lags=config.get('lags', [1, 2])
+            variables=config['variables'],
+            lags=config['lags']
         )
 
         # 3. Create differences if requested
-        if config.get('create_differences', True):
+        if config['create_differences']:
             print("\nCreating first differences...")
             df = self.create_differences(
                 df,
-                variables=config.get('variables')
+                variables=config['variables']
+            )
+            
+            # 3.1 Create lagged differences
+            print("\nCreating lagged differences...")
+            diff_vars = [f"{var}_diff" for var in config['variables']]
+            df = self.create_lagged_variables(
+                df,
+                variables=diff_vars,
+                lags=[1]  # We only need lag-1 for differences
             )
 
         # 4. Create log transformations if requested
-        if config.get('create_logs', True):
+        if config['create_logs']:
             print("\nCreating log transformations...")
             df = self.create_log_transformations(
                 df,
-                variables=config.get('variables')
+                variables=config['variables']
             )
 
         # 5. Handle missing data
-        missing_method = config.get('missing_data_method', 'interpolate')  # Zmienione
+        missing_method = config['missing_data_method']
         print(f"\nHandling missing data using method: {missing_method}")
         df = self.handle_missing_panel_data(df, method=missing_method)
 

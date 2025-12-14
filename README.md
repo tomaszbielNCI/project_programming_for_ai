@@ -14,7 +14,7 @@ This project implements a Random Forest model for time series forecasting of COâ
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/project_programming_for_ai.git
+   git clone https://github.com/tomaszbielNCI/project_programming_for_ai.git
    cd project_programming_for_ai
    ```
 

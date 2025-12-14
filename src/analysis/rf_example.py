@@ -71,9 +71,8 @@ def save_results_txt(results_dir, features, y_test, y_pred, metrics, feature_imp
 
         f.write("FEATURE IMPORTANCE:\n")
         f.write("-" * 40 + "\n")
-        sorted_importance = sorted(zip(features, feature_importance), key=lambda x: x[1], reverse=True)
-        for feat, imp in sorted_importance:
-            f.write(f"{feat:15s}: {imp:6.4f}\n")
+        for i, (feature, importance) in enumerate(feature_importance.items(), 1):
+            f.write(f"{i}. {feature}: {importance:.6f}\n")
         f.write("\n")
 
         f.write("PREDICTION SUMMARY:\n")
@@ -100,70 +99,35 @@ def load_data():
     try:
         data_io = DataIO()
         # Load the data from CSV - adjust the file path as needed
-        df = data_io.from_csv('cleaned_data.csv').load()
+        df = data_io.from_csv('preprocessed_data_5.csv').load()
+        # chagned from 'cleaned_data.csv' to 'preprocessed_data.csv'
         print(f"Loaded {len(df)} records")
         return df
     except Exception as e:
         print(f"Error loading data: {e}")
         sys.exit(1)
 
-'''
-def prepare_data(data, include_temp=True):
-    """Prepare data for modeling.
-    
-    Args:
-        data: DataFrame with the input data
-        include_temp: If False, excludes 'mean_temp' from features
-    """
-    print("\nPreparing data...")
-    # Select features and target
-    base_features = ['energy_use', 'population', 'renewable_pct', 'gdp']
-    if include_temp:
-        features = base_features + ['mean_temp']
-    else:
-        features = base_features
-    
-    target = 'emissions'
 
-    # Create a copy to avoid SettingWithCopyWarning
-    df = data[features + [target]].copy()
-
-    # Print info about missing values
-    print("\nMissing values per column before cleaning:")
-    print(df.isnull().sum())
-
-    # Drop rows with any missing values
-    df_clean = df.dropna()
-    
-    print(f"\nOriginal dataset size: {len(df)} records")
-    print(f"After removing rows with missing values: {len(df_clean)} records")
-    print(f"Dropped {len(df) - len(df_clean)} records due to missing values")
-
-    # Separate features and target
-    X = df_clean[features]
-    y = df_clean[target]
-
-    # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
-    )
-
-    # Print dataset information
-    print(f"\nUsing features: {features}")
-    print(f"Final dataset size: {len(X)} complete records")
-
-    return X_train, X_test, y_train, y_test, features
-'''
-def prepare_data(data, include_temp=True, split_year=2010):
+def prepare_data(data, include_temp=True, split_year=2012):
     print("\nPreparing data...")
 
-    base_features = ['energy_use', 'population', 'renewable_pct', 'gdp']
+    #base_features = ['energy_use', 'population', 'renewable_pct', 'gdp']
+    #base_features = ['energy_use_diff', 'population_diff', 'renewable_pct_diff', 'gdp_diff']
+    base_features = [
+        'emissions_diff_lag1',
+        'energy_use_diff_lag1',
+        'gdp_diff_lag1',
+        'population_diff_lag1',
+        'renewable_pct_diff_lag1'
+    ]
+
     if include_temp:
         features = base_features + ['mean_temp']
     else:
         features = base_features
 
-    target = 'emissions'
+    target = 'emissions_diff'
+    #target = 'emissions'
 
     # enforce year sort
     data = data.sort_values(["country", "year"]).reset_index(drop=True)
@@ -197,41 +161,82 @@ def train_random_forest(X_train, X_test, y_train, y_test):
     print("\nTraining Random Forest model...")
 
     model = RandomForestRegressor(
-        n_estimators=100,
-        max_depth=10,
+        n_estimators=200,          # Increased number of trees
+        max_depth=10,              # Limit tree depth to prevent overfitting
+        min_samples_split=10,      # Minimum samples to split a node
+        min_samples_leaf=5,        # Minimum samples at a leaf node
+        max_features='sqrt',       # Number of features to consider at each split
+        bootstrap=True,            # Bootstrap samples when building trees
         random_state=42,
-        n_jobs=-1
+        n_jobs=-1,
+        verbose=1
     )
 
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
 
+    # Get feature importances
+    feature_importance = pd.Series(model.feature_importances_, index=X_train.columns)
+    feature_importance = feature_importance.sort_values(ascending=False)
+    
+    # Print top 10 most important features
+    print("\nTop 10 most important features:")
+    for i, (feature, importance) in enumerate(feature_importance.head(10).items(), 1):
+        print(f"{i}. {feature}: {importance:.4f}")
+
     metrics = {
         "r2": r2_score(y_test, y_pred),
         "mse": mean_squared_error(y_test, y_pred),
-        "mae": mean_absolute_error(y_test, y_pred)
+        "mae": mean_absolute_error(y_test, y_pred),
+        "feature_importance": feature_importance.to_dict()
     }
 
-    print(f"R² Score: {metrics['r2']:.4f}")
+    print(f"\nR² Score: {metrics['r2']:.4f}")
     print(f"Mean Squared Error: {metrics['mse']:.2f}")
     print(f"Mean Absolute Error: {metrics['mae']:.2f}")
 
-    return model, y_pred, metrics
+    return model, y_pred, metrics, feature_importance
 
 
-def plot_feature_importance(model, feature_names, output_path):
+def plot_feature_importance(model, feature_names, output_path, max_features=20):
     """Plot feature importance."""
+    # Get feature importances and sort them
     importance = model.feature_importances_
-    indices = np.argsort(importance)[::-1]
+    indices = np.argsort(importance)[::-1]  # Sort in descending order
+    
+    # Limit number of features to display for better readability
+    if len(indices) > max_features:
+        indices = indices[:max_features]
+        feature_names = [feature_names[i] for i in indices]
+        importance = importance[indices]
+    else:
+        feature_names = [feature_names[i] for i in indices]
+        importance = importance[indices]
 
-    plt.figure(figsize=(10, 6))
-    plt.title("Feature Importance")
-    plt.bar(range(len(importance)), importance[indices], align='center')
-    plt.xticks(range(len(importance)), [feature_names[i] for i in indices], rotation=45, ha='right')
+    # Create horizontal bar plot
+    plt.figure(figsize=(12, 8))
+    y_pos = np.arange(len(importance))
+    
+    # Create bars
+    bars = plt.barh(y_pos, importance, align='center', color='skyblue')
+    
+    # Add value labels on the bars
+    for bar in bars:
+        width = bar.get_width()
+        plt.text(width * 1.02, bar.get_y() + bar.get_height()/2.,
+                f'{width:.4f}',
+                va='center', ha='left')
+    
+    plt.yticks(y_pos, feature_names)
+    plt.xlabel('Importance Score')
+    plt.title('Feature Importance')
+    plt.gca().invert_yaxis()  # Most important on top
     plt.tight_layout()
+    
+    # Save the plot
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"📈 Saved feature importance plot: {output_path}")
+    print(f"📊 Saved feature importance plot: {output_path}")
 
 
 def plot_predictions(y_test, y_pred, output_path):
@@ -264,19 +269,27 @@ def main():
     data = load_data()
     X_train, X_test, y_train, y_test, features = prepare_data(data, include_temp=True)
 
-    # Scale features
+    # Scale features while preserving column names
     scaler = StandardScaler()
-    X_train_s = scaler.fit_transform(X_train)
-    X_test_s = scaler.transform(X_test)
+    X_train_s = pd.DataFrame(
+        scaler.fit_transform(X_train),
+        columns=X_train.columns,
+        index=X_train.index
+    )
+    X_test_s = pd.DataFrame(
+        scaler.transform(X_test),
+        columns=X_test.columns,
+        index=X_test.index
+    )
 
     # Train model and get predictions
-    model, y_pred, metrics = train_random_forest(X_train_s, X_test_s, y_train, y_test)
+    model, y_pred, metrics, feature_importance = train_random_forest(X_train_s, X_test_s, y_train, y_test)
 
-    # Save results
+    # Save results with feature importance
     save_results_txt(results_dir, features, y_test, y_pred, metrics, 
-                    model.feature_importances_)
+                    feature_importance)
     
-    # Plot feature importance
+    # Plot feature importance using the returned Series which is already sorted
     plot_feature_importance(model, features, results_dir / 'feature_importance.png')
     
     # Plot predictions
@@ -292,17 +305,25 @@ def main():
     # Prepare data without mean_temp
     X_train_nt, X_test_nt, y_train_nt, y_test_nt, features_nt = prepare_data(data, include_temp=False)
     
-    # Scale features
+    # Scale features for no-temp model while preserving column names
     scaler_nt = StandardScaler()
-    X_train_nt_s = scaler_nt.fit_transform(X_train_nt)
-    X_test_nt_s = scaler_nt.transform(X_test_nt)
+    X_train_nt_s = pd.DataFrame(
+        scaler_nt.fit_transform(X_train_nt),
+        columns=X_train_nt.columns,
+        index=X_train_nt.index
+    )
+    X_test_nt_s = pd.DataFrame(
+        scaler_nt.transform(X_test_nt),
+        columns=X_test_nt.columns,
+        index=X_test_nt.index
+    )
 
     # Train model and get predictions
-    model_nt, y_pred_nt, metrics_nt = train_random_forest(X_train_nt_s, X_test_nt_s, y_train_nt, y_test_nt)
+    model_nt, y_pred_nt, metrics_nt, feature_importance_nt = train_random_forest(X_train_nt_s, X_test_nt_s, y_train_nt, y_test_nt)
     
     # Save results
     save_results_txt(results_dir_no_temp, features_nt, y_test_nt, y_pred_nt, metrics_nt,
-                    model_nt.feature_importances_)
+                    feature_importance_nt)
     
     # Plot feature importance
     plot_feature_importance(model_nt, features_nt, results_dir_no_temp / 'feature_importance.png')
