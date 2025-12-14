@@ -18,15 +18,15 @@ class NeuralProphetForecaster:
         self.data_path = data_path
         self.df = None
         self.model = None
-        self.df_prepared = None  # Initialize df_prepared as None
+        self.df_prepared = None  # Store prepared dataframe for later use
 
-        # Użycie bezwzględnej ścieżki do wyników
+        # Set up results directory with absolute path
         self.results_base = Path(__file__).parent.parent.parent.parent / "results" / "neuralprophet"
         self.results_base.mkdir(parents=True, exist_ok=True)
 
         print(f"📂 Results will be saved to: {self.results_base.absolute()}")
 
-        # Znajdź najwyższy istniejący numer run
+        # Find the highest existing run number
         existing_runs = []
         for item in self.results_base.iterdir():
             if item.is_dir() and item.name.startswith("run_"):
@@ -74,7 +74,7 @@ class NeuralProphetForecaster:
         return df_ready, regressors
 
     def create_model(self, regressors=None, **kwargs):
-        # Konfiguracja trainer do zapisu logów w folderze run
+        # Configure trainer for logging in the run folder
         trainer_config = {
             'default_root_dir': str(self.run_path.absolute()),
             'logger': False
@@ -150,7 +150,7 @@ class NeuralProphetForecaster:
         filename = f"model_{country}_{target_col}.pkl"
         save_path = self.run_path / "models" / filename
 
-        # Zapis modelu za pomocą pickle (bez metody save)
+        # Save model using pickle (fallback when save method not available)
         with open(save_path, 'wb') as f:
             pickle.dump(self.model, f)
 
@@ -174,7 +174,7 @@ class NeuralProphetForecaster:
         print(f"{'=' * 50}")
 
         df_prepared, regressors = self.load_and_prepare(country, target_col)
-        self.df_prepared = df_prepared  # Zapisz jako atrybut
+        self.df_prepared = df_prepared  # Store as instance variable for later use
 
         if len(df_prepared) < 10:
             print(f"⚠️ Warning: Only {len(df_prepared)} data points for {country}")
