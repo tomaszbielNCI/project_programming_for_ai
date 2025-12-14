@@ -1,6 +1,5 @@
 # Project specific
 archive/
-results/
 temp_data/
 *.csv
 *.pkl
