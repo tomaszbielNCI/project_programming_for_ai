@@ -3,8 +3,8 @@ import shutil
 
 def move_results():
     # Source and destination paths
-    src_base = Path("src/analysis/results/analysis")
-    dst_base = Path("results/random_forest")
+    src_base = Path("src/models/forecasting/results/neuralprophet")
+    dst_base = Path("results/neuralprophet")
     
     # Create destination directory if it doesn't exist
     dst_base.mkdir(parents=True, exist_ok=True)

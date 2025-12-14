@@ -24,22 +24,28 @@ pd.set_option('display.width', 1000)
 sns.set_style("whitegrid")
 
 
-def get_next_results_dir(base_path='results/analysis'):
-    """Generate unique results directory with index."""
-    base_path = Path(base_path)
+def get_next_results_dir():
+    """Generate unique results directory with index in the project's results/random_forest directory."""
+    # Get the project root (go up two levels from src/analysis)
+    project_root = Path(__file__).parent.parent.parent
+    base_path = project_root / "results" / "random_forest"
+    
+    # Create the base directory if it doesn't exist
     base_path.mkdir(parents=True, exist_ok=True)
 
-    # Find next available index
-    index = 1
-    while (base_path / f"run_{index:03d}").exists():
-        index += 1
+    # Find the next available run number
+    run_number = 1
+    while (base_path / f"run_{run_number:03d}").exists():
+        run_number += 1
 
-    results_dir = base_path / f"run_{index:03d}"
-    results_dir.mkdir(exist_ok=True)
+    # Create the run directory
+    run_dir = base_path / f"run_{run_number:03d}"
+    run_dir.mkdir(exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    print(f"Created results directory: {results_dir} (run_{index:03d}_{timestamp})")
-    return results_dir
+    print(f"Created results directory: {run_dir} (run_{run_number:03d}_{timestamp})")
+    print(f"Results will be saved to: {run_dir.absolute()}")
+    return run_dir
 
 
 def save_results_txt(results_dir, features, y_test, y_pred, metrics, feature_importance):
@@ -263,7 +269,6 @@ def main():
     print("ANALYSIS WITH MEAN_TEMP")
     print("="*50)
     results_dir = get_next_results_dir()
-    print(f"Created results directory: {results_dir}")
     
     # Load and prepare data
     data = load_data()
@@ -300,7 +305,6 @@ def main():
     print("ANALYSIS WITHOUT MEAN_TEMP")
     print("="*50)
     results_dir_no_temp = get_next_results_dir()
-    print(f"Created results directory: {results_dir_no_temp}")
     
     # Prepare data without mean_temp
     X_train_nt, X_test_nt, y_train_nt, y_test_nt, features_nt = prepare_data(data, include_temp=False)

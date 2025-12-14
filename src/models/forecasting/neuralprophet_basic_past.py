@@ -1,76 +1,70 @@
-"""
-Minimalistyczny szablon NeuralProphet dla danych panelowych.
-Współpracuje z Twoją strukturą DataIO.
-"""
-
 import pandas as pd
 import numpy as np
 from neuralprophet import NeuralProphet
 import matplotlib.pyplot as plt
 from pathlib import Path
+import json
+import pickle
 import warnings
 
 warnings.filterwarnings('ignore')
 
-# Import Twojego DataIO
 from src.loaders.data_IO import DataIO
 
 
 class NeuralProphetForecaster:
-    """
-    Minimalny forecast dla jednego kraju.
-    """
-
     def __init__(self, data_path: str = "preprocessed_data_5.csv"):
         self.data_io = DataIO()
         self.data_path = data_path
         self.df = None
         self.model = None
+        self.df_prepared = None  # Initialize df_prepared as None
+
+        # Użycie bezwzględnej ścieżki do wyników
+        self.results_base = Path(__file__).parent.parent.parent.parent / "results" / "neuralprophet"
+        self.results_base.mkdir(parents=True, exist_ok=True)
+
+        print(f"📂 Results will be saved to: {self.results_base.absolute()}")
+
+        # Znajdź najwyższy istniejący numer run
+        existing_runs = []
+        for item in self.results_base.iterdir():
+            if item.is_dir() and item.name.startswith("run_"):
+                try:
+                    num = int(item.name.split("_")[1])
+                    existing_runs.append(num)
+                except:
+                    continue
+
+        self.run_id = max(existing_runs) + 1 if existing_runs else 1
+        self.run_path = self.results_base / f"run_{self.run_id:03d}"
+        self.run_path.mkdir(parents=True, exist_ok=True)
+
+        (self.run_path / "forecasts").mkdir(exist_ok=True)
+        (self.run_path / "plots").mkdir(exist_ok=True)
+        (self.run_path / "models").mkdir(exist_ok=True)
+
+        print(f"📁 Run folder: {self.run_path}")
 
     def load_and_prepare(self, country: str, target_col: str = "emissions"):
-        """
-        Ładuje dane i przygotowuje dla jednego kraju.
-
-        Args:
-            country: Nazwa kraju (musi być w kolumnie 'country')
-            target_col: Kolumna do forecastu (emissions, energy_use, etc.)
-
-        Returns:
-            df_ready: DataFrame gotowy do NeuralProphet
-        """
-        # Load data using your DataIO
         self.df = self.data_io.from_csv(self.data_path).load()
-
-        # Filter for specific country
         df_country = self.df[self.df['country'] == country].copy()
 
         if len(df_country) == 0:
             raise ValueError(f"Country '{country}' not found in data")
 
-        # Prepare for NeuralProphet: need 'ds' and 'y' columns
-        # Convert year to datetime (first day of year)
         df_country['ds'] = pd.to_datetime(df_country['year'].astype(str) + '-01-01')
-
-        # Target variable
         df_country['y'] = df_country[target_col]
 
-        # Select only necessary columns
         keep_cols = ['ds', 'y']
-
-        # Add other numeric columns as regressors (optional)
         numeric_cols = df_country.select_dtypes(include=[np.number]).columns.tolist()
         numeric_cols = [col for col in numeric_cols if col not in ['year', 'y', target_col]]
 
-        # You can select specific regressors or use all
-        # Example: use these common ones if they exist
-        possible_regressors = ['population', 'gdp', 'energy_use', 'renewable_pct'] # 'mean_temp' - maybe letter
+        possible_regressors = ['population', 'gdp', 'energy_use', 'renewable_pct']
         regressors = [col for col in possible_regressors if col in numeric_cols]
-
         keep_cols.extend(regressors)
 
         df_ready = df_country[keep_cols].copy()
-
-        # Drop rows where target is NaN (NeuralProphet can't handle NaN in y)
         df_ready = df_ready.dropna(subset=['y'])
 
         print(f"Prepared data for {country}: {len(df_ready)} rows")
@@ -80,26 +74,24 @@ class NeuralProphetForecaster:
         return df_ready, regressors
 
     def create_model(self, regressors=None, **kwargs):
-        """
-        Creates NeuralProphet model with basic config.
+        # Konfiguracja trainer do zapisu logów w folderze run
+        trainer_config = {
+            'default_root_dir': str(self.run_path.absolute()),
+            'logger': False
+        }
 
-        Args:
-            regressors: List of column names to use as regressors
-            **kwargs: Additional NeuralProphet parameters
-        """
-        # Basic config - minimal for yearly data
         model = NeuralProphet(
-            n_forecasts=5,  # Forecast 5 years ahead
-            n_lags=3,  # Use 3 years of history
-            yearly_seasonality=True,  # Yearly patterns
+            n_forecasts=5,
+            n_lags=3,
+            yearly_seasonality=True,
             weekly_seasonality=False,
             daily_seasonality=False,
-            epochs=50,  # Reduced for speed
+            epochs=50,
             learning_rate=0.1,
+            trainer_config=trainer_config,
             **kwargs
         )
 
-        # Add regressors if specified
         if regressors:
             for reg in regressors:
                 model.add_lagged_regressor(reg)
@@ -108,22 +100,10 @@ class NeuralProphetForecaster:
         return model
 
     def train_and_forecast(self, df, periods=5):
-        """
-        Trains model and makes forecast.
-
-        Args:
-            df: Prepared DataFrame with 'ds', 'y', and regressors
-            periods: Number of future periods to forecast
-
-        Returns:
-            forecast: DataFrame with predictions
-            metrics: Dictionary with training metrics
-        """
         if self.model is None:
             self.create_model()
 
-        # Split data (last few years for testing)
-        train_size = max(3, len(df) - periods)  # Keep at least 3 years for training
+        train_size = max(3, len(df) - periods)
         df_train = df.iloc[:train_size]
         df_test = df.iloc[train_size:] if train_size < len(df) else None
 
@@ -131,63 +111,92 @@ class NeuralProphetForecaster:
         if df_test is not None:
             print(f"Testing on {len(df_test)} years")
 
-        # Train
         metrics = self.model.fit(df_train, freq='Y')
 
-        # Make future dataframe for forecast
         future = self.model.make_future_dataframe(
             df_train,
             periods=periods,
             n_historic_predictions=len(df_train)
         )
 
-        # Forecast
         forecast = self.model.predict(future)
 
         return forecast, metrics
 
     def plot_results(self, forecast, country, target_col):
-        """Simple plot of forecast results."""
         fig = self.model.plot(forecast, plotting_backend='matplotlib')
         plt.suptitle(f"NeuralProphet Forecast for {country} - {target_col}", fontsize=14)
         plt.tight_layout()
 
-        # Save plot
-        save_path = Path("results") / "analysis" / "neuralprophet"
-        save_path.mkdir(parents=True, exist_ok=True)
-
-        filename = f"np_forecast_{country}_{target_col}.png"
-        plt.savefig(save_path / filename, dpi=150)
+        filename = f"forecast_{country}_{target_col}.png"
+        save_path = self.run_path / "plots" / filename
+        plt.savefig(save_path, dpi=150)
         plt.close()
 
-        print(f"Plot saved to: {save_path / filename}")
+        print(f"📈 Plot saved to: {save_path}")
         return fig
 
+    def save_forecast_data(self, forecast, country, target_col):
+        filename = f"forecast_{country}_{target_col}.csv"
+        save_path = self.run_path / "forecasts" / filename
+        forecast.to_csv(save_path, index=False)
+        print(f"💾 Forecast data saved to: {save_path}")
+
+    def save_model(self, country, target_col):
+        if self.model is None:
+            print("⚠️ No model to save")
+            return
+
+        filename = f"model_{country}_{target_col}.pkl"
+        save_path = self.run_path / "models" / filename
+
+        # Zapis modelu za pomocą pickle (bez metody save)
+        with open(save_path, 'wb') as f:
+            pickle.dump(self.model, f)
+
+        print(f"💾 Model saved to: {save_path}")
+
+    def save_config(self, country, params):
+        config = {
+            'run_id': self.run_id,
+            'country': country,
+            'timestamp': pd.Timestamp.now().isoformat(),
+            'parameters': params
+        }
+
+        config_path = self.run_path / "config.json"
+        with open(config_path, 'w') as f:
+            json.dump(config, f, indent=2)
+
     def run_for_country(self, country, target_col="emissions", periods=5):
-        """
-        Complete pipeline for one country.
-        """
         print(f"\n{'=' * 50}")
         print(f"NeuralProphet Analysis for: {country}")
         print(f"{'=' * 50}")
 
-        # 1. Prepare data
         df_prepared, regressors = self.load_and_prepare(country, target_col)
+        self.df_prepared = df_prepared  # Zapisz jako atrybut
 
         if len(df_prepared) < 10:
-            print(f"⚠️ Warning: Only {len(df_prepared)} data points for {country}. May not be enough.")
+            print(f"⚠️ Warning: Only {len(df_prepared)} data points for {country}")
             return None
 
-        # 2. Create model with regressors
         self.create_model(regressors=regressors)
-
-        # 3. Train and forecast
         forecast, metrics = self.train_and_forecast(df_prepared, periods=periods)
 
-        # 4. Plot
         self.plot_results(forecast, country, target_col)
+        self.save_forecast_data(forecast, country, target_col)
+        self.save_model(country, target_col)
 
-        # 5. Print summary
+        params = {
+            'target': target_col,
+            'forecast_periods': periods,
+            'regressors': regressors,
+            'data_points': len(df_prepared),
+            'train_test_split': True,
+            'last_historical_year': df_prepared['ds'].max().year
+        }
+        self.save_config(country, params)
+
         print(f"\n📊 Summary for {country}:")
         print(f"   - Data points: {len(df_prepared)}")
         print(f"   - Last actual value: {df_prepared['y'].iloc[-1]:.2f}")
@@ -197,20 +206,15 @@ class NeuralProphetForecaster:
 
 
 def main():
-    """Example usage - minimal test"""
-    # Initialize forecaster
     forecaster = NeuralProphetForecaster("preprocessed_data_5.csv")
-
-    # Test with a few countries that likely have data
-    test_countries = ['Poland', 'Germany', 'France', 'China', 'United States' ]  # Change based on your data
+    test_countries = ['Poland', 'Germany', 'France', 'China', 'United States']
 
     forecasts = {}
-
     for country in test_countries:
         try:
             forecast = forecaster.run_for_country(
                 country=country,
-                target_col="emissions",  # Change to your target
+                target_col="emissions",
                 periods=5
             )
             if forecast is not None:
@@ -219,6 +223,7 @@ def main():
             print(f"❌ Error for {country}: {e}")
 
     print(f"\n✅ Completed forecasts for {len(forecasts)} countries")
+    print(f"📁 All results saved in: {forecaster.run_path}")
 
 
 if __name__ == "__main__":

@@ -43,9 +43,10 @@ project_programming_for_ai/
 ## 🔍 Example Usage
 
 ### Training the Model
+
 ```python
 # Run analysis with default parameters
-from src.analysis.rf_example import main
+from src.models.rf_example import main
 
 main()
 ```

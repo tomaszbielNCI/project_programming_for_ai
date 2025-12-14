@@ -1,0 +1,17 @@
+{
+  "run_id": 3,
+  "country": "United States",
+  "timestamp": "2025-12-14T15:45:01.205120",
+  "parameters": {
+    "target": "emissions",
+    "forecast_periods": 5,
+    "regressors": [
+      "population",
+      "gdp",
+      "energy_use",
+      "renewable_pct"
+    ],
+    "data_points": 33,
+    "last_historical_year": 2022
+  }
+}
