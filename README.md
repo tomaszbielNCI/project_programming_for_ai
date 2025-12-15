@@ -25,7 +25,7 @@ This project implements a Random Forest model for time series forecasting of CO�
 
 3. Run the analysis:
    ```bash
-   python src/analysis/rf_example.py
+   python src/diagnostic/rf_example.py
    ```
 
 ## 🏗️ Project Structure
@@ -45,7 +45,7 @@ project_programming_for_ai/
 ### Training the Model
 
 ```python
-# Run analysis with default parameters
+# Run diagnostic with default parameters
 from src.models.rf_example import main
 
 main()
@@ -60,10 +60,10 @@ You can adjust model parameters in `rf_example.py`:
 ## 📊 Sample Results
 
 ### Feature Importance
-![Feature Importance](src/analysis/results/analysis/feature_importance.png)
+![Feature Importance](src/diagnostic/results/analysis/feature_importance.png)
 
 ### Predictions vs Actual
-![Predictions](src/analysis/results/analysis/predictions_plot.png)
+![Predictions](src/diagnostic/results/analysis/predictions_plot.png)
 
 ## 📝 License
 

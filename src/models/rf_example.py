@@ -26,7 +26,7 @@ sns.set_style("whitegrid")
 
 def get_next_results_dir():
     """Generate unique results directory with index in the project's results/random_forest directory."""
-    # Get the project root (go up two levels from src/analysis)
+    # Get the project root (go up two levels from src/diagnostic)
     project_root = Path(__file__).parent.parent.parent
     base_path = project_root / "results" / "random_forest"
     
@@ -49,8 +49,8 @@ def get_next_results_dir():
 
 
 def save_results_txt(results_dir, features, y_test, y_pred, metrics, feature_importance):
-    """Save all analysis results to TEXT file."""
-    results_file = results_dir / "results.countries_of_interest.txt"
+    """Save all diagnostic results to TEXT file."""
+    results_file = results_dir / "results.countries_of_interest 1.txt"
     
     # Reset index to ensure we have sequential indices
     y_test = y_test.reset_index(drop=True)
@@ -261,10 +261,10 @@ def plot_predictions(y_test, y_pred, output_path):
 
 
 def main():
-    """Main function to run the analysis."""
+    """Main function to run the diagnostic."""
     print(f"=== Emissions Prediction using Random Forest ===")
     
-    # Run analysis with mean_temp
+    # Run diagnostic with mean_temp
     print("\n" + "="*50)
     print("ANALYSIS WITH MEAN_TEMP")
     print("="*50)
@@ -300,7 +300,7 @@ def main():
     # Plot predictions
     plot_predictions(y_test, y_pred, results_dir / 'predictions_plot.png')
     
-    # Run analysis WITHOUT mean_temp
+    # Run diagnostic WITHOUT mean_temp
     print("\n" + "="*50)
     print("ANALYSIS WITHOUT MEAN_TEMP")
     print("="*50)
@@ -339,8 +339,8 @@ def main():
     print(f"- With mean_temp: {results_dir}")
     print(f"- Without mean_temp: {results_dir_no_temp}")
     print(f"📄 Main results files:")
-    print(f"  - With mean_temp: {os.path.join(results_dir, 'results.countries_of_interest.txt')}")
-    print(f"  - Without mean_temp: {os.path.join(results_dir_no_temp, 'results.countries_of_interest.txt')}")
+    print(f"  - With mean_temp: {os.path.join(results_dir, 'results.countries_of_interest 1.txt')}")
+    print(f"  - Without mean_temp: {os.path.join(results_dir_no_temp, 'results.countries_of_interest 1.txt')}")
 
 
 if __name__ == "__main__":

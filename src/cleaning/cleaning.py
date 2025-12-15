@@ -34,7 +34,7 @@ import pandas as pd
 from pathlib import Path
 
 
-def load_country_list(file_path='countries_of_interest.txt'):
+def load_country_list(file_path='countries_of_interest 1.txt'):
     """
     Load country list from a text file containing a Python list of countries.
 
@@ -64,7 +64,7 @@ def load_country_list(file_path='countries_of_interest.txt'):
         return []
 
 
-def clean_data(country_list_file='countries_of_interest.txt'):
+def clean_data(country_list_file='countries_of_interest 1.txt'):
     """Function for data cleaning - selects specific columns and filters by country list"""
 
     # Initialize DataIO

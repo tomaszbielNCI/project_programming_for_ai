@@ -29,7 +29,7 @@ class SHAPAnalyzer(BaseAIModel):
         self.feature_names = None
 
     def prepare_data(self, X, feature_names=None):
-        """Prepare data for SHAP analysis"""
+        """Prepare data for SHAP diagnostic"""
         if isinstance(X, pd.DataFrame):
             self.feature_names = X.columns.tolist() if feature_names is None else feature_names
             return X.values
@@ -43,7 +43,7 @@ class SHAPAnalyzer(BaseAIModel):
             self.base_model = model
 
         if self.base_model is None:
-            raise ValueError("No model provided for SHAP analysis")
+            raise ValueError("No model provided for SHAP diagnostic")
 
         X_prepared = self.prepare_data(X, kwargs.get('feature_names'))
 

@@ -2,7 +2,7 @@
 """
 Panel Data Preprocessing Module
 Transforms cleaned data into panel data format with proper transformations
-for time-series and cross-sectional analysis.
+for time-series and cross-sectional diagnostic.
 
 Sequence of commands from IPython session:
 missing_by_country_year = clean_df.groupby(['country', 'year']).apply(
@@ -60,7 +60,8 @@ class PanelDataPreprocessor:
         print(f"Observations lost due to lags: {total_rows - non_na_rows}")
         return df
 
-    def create_differences(self, df: pd.DataFrame,
+    @staticmethod
+    def create_differences(df: pd.DataFrame,
                            variables: List[str] = None) -> pd.DataFrame:
         """
         Create first differences (delta) for specified variables.
@@ -113,13 +114,14 @@ class PanelDataPreprocessor:
             
         return df
 
-    def handle_missing_panel_data(self, df: pd.DataFrame,
-                                  method: str = 'interpolate',
-                                  group_col: str = 'country',
-                                  critical_vars: List[str] = None,
-                                  zero_fill_vars: List[str] = None) -> pd.DataFrame:
+    @staticmethod
+    def handle_missing_panel_data(df: pd.DataFrame,
+                                 method: str = 'interpolate',
+                                 group_col: str = 'country',
+                                 critical_vars: List[str] = None,
+                                 zero_fill_vars: List[str] = None) -> pd.DataFrame:
         """
-        Handle missing data for panel analysis with variable-specific strategies.
+        Handle missing data for panel diagnostic with variable-specific strategies.
 
         Args:
             df: Input DataFrame
@@ -244,7 +246,8 @@ class PanelDataPreprocessor:
         return df_clean
 
 
-    def check_panel_balance(self, df: pd.DataFrame,
+    @staticmethod
+    def check_panel_balance(df: pd.DataFrame,
                           entity_col: str = 'country',
                           time_col: str = 'year') -> Dict:
         """

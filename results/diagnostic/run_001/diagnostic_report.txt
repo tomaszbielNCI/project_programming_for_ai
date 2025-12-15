@@ -1,0 +1,145 @@
+================================================================================
+DIAGNOSTIC REPORT - DATA QUALITY ANALYSIS
+================================================================================
+
+ANALYZED COUNTRIES: United States, Ireland, China
+DATE: 2025-12-15 04:17:19
+DATA SOURCE: preprocessed_data_5.csv
+
+================================================================================
+SUMMARY OF FINDINGS
+================================================================================
+
+STATISTICAL ASSUMPTIONS VIOLATIONS (3/3 countries):
+------------------------------------------------------------
+• Non-stationarity: 3/3
+• Autocorrelation: 3/3
+• Heteroskedasticity: 2/3
+• Non-normality: 1/3
+
+================================================================================
+DETAILED RESULTS BY COUNTRY
+================================================================================
+
+COUNTRY: United States
+------------------------------------------------------------
+Observations: 33 (1990-2022)
+Mean emissions: 18.67
+Std emissions: 2.29
+OLS R²: 0.9953
+
+1. STATIONARITY TEST (Augmented Dickey-Fuller):
+   Test statistic: 1.1900
+   p-value: 0.995916
+   Conclusion: NON-STATIONARY
+   Critical values:
+     1%: -3.6699
+     5%: -2.9641
+     10%: -2.6212
+
+2. AUTOCORRELATION TEST (Durbin-Watson):
+   Test statistic: 1.1754
+   Interpretation: Autocorrelation present
+   (1.5-2.5 = no autocorrelation)
+
+3. HETEROSKEDASTICITY TEST (Breusch-Pagan):
+   LM statistic: 0.9029
+   LM p-value: 0.824731
+   Conclusion: Homoskedastic
+
+4. NORMALITY TEST (Shapiro-Wilk):
+   Test statistic: 0.9631
+   p-value: 0.314669
+   Conclusion: NORMAL
+
+============================================================
+
+COUNTRY: Ireland
+------------------------------------------------------------
+Observations: 33 (1990-2022)
+Mean emissions: 9.59
+Std emissions: 1.55
+OLS R²: 0.9861
+
+1. STATIONARITY TEST (Augmented Dickey-Fuller):
+   Test statistic: 0.0877
+   p-value: 0.965208
+   Conclusion: NON-STATIONARY
+   Critical values:
+     1%: -3.6535
+     5%: -2.9572
+     10%: -2.6176
+
+2. AUTOCORRELATION TEST (Durbin-Watson):
+   Test statistic: 1.2235
+   Interpretation: Autocorrelation present
+   (1.5-2.5 = no autocorrelation)
+
+3. HETEROSKEDASTICITY TEST (Breusch-Pagan):
+   LM statistic: 8.8281
+   LM p-value: 0.031665
+   Conclusion: Heteroskedastic
+
+4. NORMALITY TEST (Shapiro-Wilk):
+   Test statistic: 0.9906
+   p-value: 0.991182
+   Conclusion: NORMAL
+
+============================================================
+
+COUNTRY: China
+------------------------------------------------------------
+Observations: 33 (1990-2022)
+Mean emissions: 4.94
+Std emissions: 2.14
+OLS R²: 0.9967
+
+1. STATIONARITY TEST (Augmented Dickey-Fuller):
+   Test statistic: -0.2331
+   p-value: 0.934461
+   Conclusion: NON-STATIONARY
+   Critical values:
+     1%: -3.6614
+     5%: -2.9605
+     10%: -2.6193
+
+2. AUTOCORRELATION TEST (Durbin-Watson):
+   Test statistic: 0.8952
+   Interpretation: Autocorrelation present
+   (1.5-2.5 = no autocorrelation)
+
+3. HETEROSKEDASTICITY TEST (Breusch-Pagan):
+   LM statistic: 13.2831
+   LM p-value: 0.004063
+   Conclusion: Heteroskedastic
+
+4. NORMALITY TEST (Shapiro-Wilk):
+   Test statistic: 0.9223
+   p-value: 0.021210
+   Conclusion: NON-NORMAL
+
+============================================================
+
+================================================================================
+CONCLUSIONS AND RECOMMENDATIONS
+================================================================================
+
+MAJOR ISSUES IDENTIFIED:
+1. NON-STATIONARITY: All countries show trends over time
+2. AUTOCORRELATION: Emissions are correlated with past values
+3. HETEROSKEDASTICITY: Variance changes over time
+4. NON-NORMALITY: Data doesn't follow normal distribution
+5. SMALL SAMPLE: Only ~30 observations per country
+
+IMPLICATIONS FOR AI/MACHINE LEARNING MODELS:
+- Random Forest: ❌ NOT SUITABLE (violates independence assumption)
+- NeuralProphet: ❌ NOT SUITABLE (too few observations)
+- Deep Learning: ❌ NOT SUITABLE (needs >1000s of samples)
+- Time Series ARIMA: ⚠️ MAY WORK (but need stationarity)
+
+RECOMMENDATIONS:
+1. Obtain higher frequency data (monthly/quarterly)
+2. Collect longer time period (>50 years)
+3. Use first differences for stationarity
+4. Consider panel data models instead of pure time series
+5. Focus on descriptive analysis, not predictive modeling
