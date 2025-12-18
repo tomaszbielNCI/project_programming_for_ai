@@ -1,0 +1,37 @@
+
+RUN ID: 20251218_232622
+Instrument: US.100, Timeframe: HFD
+Observations (valid returns only): 185600
+Excluded returns due to gaps: 628
+1) Visualization completed → sanity of data confirmed visually.
+
+2) Basic statistics
+Mean: -2.295293e-08
+Std: 4.690878e-05
+Skewness: 0.246
+Excess Kurtosis: 29.039
+
+3) ACF computed
+Interpretation:
+- Significant short-lag ACF → microstructure effects
+- Decay speed informs window length for models
+
+4) Jarque–Bera Test
+JB statistic: 6522922.39, p-value: 0.00e+00
+Result: Strong rejection of normality → heavy tails confirmed
+
+5) ARCH Test
+ARCH stat: 10030.70, p-value: 0.00e+00
+Result: Strong volatility clustering detected
+
+6) Hurst Exponent
+H = 0.506
+Interpretation: Near-random walk
+
+7) Distribution fitting
+Normal: mu=-2.295e-08, sigma=4.691e-05
+Student-t: df=1.99, loc=7.725e-08, scale=1.928e-05
+
+Diagnostics complete.
+Report saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20251218_232622\US.100_HFD_report.csv
+Summary saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20251218_232622\summary.txt
