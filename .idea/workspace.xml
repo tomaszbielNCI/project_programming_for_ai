@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tomekbiel&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tomekbiel/project_programming_for_ai.git&quot;,
+    &quot;accountId&quot;: &quot;f2b4c2ad-eaf1-4ba4-8504-e16fdb0289b2&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="35fd1JwZrZDDS4H38kbWQ0BCQBu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for próba.test_atlas_connection.executor": "Run",
+    "Python tests.Python tests for próba.test_csv_loading.executor": "Run",
+    "Python tests.Python tests for próba2.test_mongo_atlas.executor": "Run",
+    "Python tests.Python tests for test_connection.test_connection.executor": "Run",
+    "Python tests.Python tests for test_connection_final.test_connection.executor": "Run",
+    "Python tests.Python tests in próba2.py.executor": "Run",
+    "Python tests.Python tests in test_connection.py.executor": "Run",
+    "Python tests.Python tests in test_connection_final.py.executor": "Run",
+    "Python tests.Python tests in test_data_IO.py.executor": "Run",
+    "Python.__init__.executor": "Run",
+    "Python.analyze_poland_temps.executor": "Run",
+    "Python.check_atlas.executor": "Run",
+    "Python.check_databases.executor": "Run",
+    "Python.cleaning.executor": "Run",
+    "Python.data_IO.executor": "Run",
+    "Python.data_summary.executor": "Run",
+    "Python.diagnostic.executor": "Run",
+    "Python.diagnostic_full.executor": "Run",
+    "Python.diagnostic_market.executor": "Run",
+    "Python.download_data.executor": "Run",
+    "Python.emissions_analysis.executor": "Run",
+    "Python.example.executor": "Run",
+    "Python.export_all_to_csv.executor": "Run",
+    "Python.history_view.executor": "Run",
+    "Python.list_collections (1).executor": "Run",
+    "Python.list_collections.executor": "Run",
+    "Python.list_databases.executor": "Run",
+    "Python.mała_wizualizacja _temperatury.executor": "Run",
+    "Python.mały_test.executor": "Run",
+    "Python.mongo_atlas_example.executor": "Run",
+    "Python.mongo_loader.executor": "Run",
+    "Python.move_rf_results.executor": "Run",
+    "Python.nerualprophet_basic_0.executor": "Run",
+    "Python.nerualprophet_basic_1.executor": "Run",
+    "Python.nerualprophet_basic_past (1).executor": "Run",
+    "Python.neuralprophet_basic.executor": "Run",
+    "Python.neuralprophet_basic_2 (1).executor": "Run",
+    "Python.neuralprophet_basic_future (1).executor": "Run",
+    "Python.neuralprophet_basic_past.executor": "Run",
+    "Python.nowe.executor": "Run",
+    "Python.parser.executor": "Run",
+    "Python.parser_arrow.executor": "Run",
+    "Python.parser_historical.executor": "Run",
+    "Python.preprocessing.executor": "Run",
+    "Python.próba.executor": "Run",
+    "Python.próba2.executor": "Run",
+    "Python.regression_analysis.executor": "Run",
+    "Python.rf_example (1).executor": "Run",
+    "Python.rf_example.executor": "Run",
+    "Python.stats.executor": "Run",
+    "Python.stock_analysis.executor": "Run",
+    "Python.sync_from_atlas.executor": "Run",
+    "Python.sync_results_to_atlas.executor": "Run",
+    "Python.sync_temp_data.executor": "Run",
+    "Python.trainer_start_flexible.executor": "Run",
+    "Python.visualize_temperatures.executor": "Run",
+    "Python.worldbank_data.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "fix/gap-handling-in-diagnostics",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/python/project_programming_for_ai/temp_data",
+    "settings.editor.selected.configurable": "settings.sync"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\python\project_programming_for_ai\temp_data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\python\project_programming_for_ai\src\ingesting" />
+      <recent name="C:\python\project_programming_for_ai\src\diagnostic" />
+      <recent name="C:\python\project_programming_for_ai\src\cleaning" />
+      <recent name="C:\python\project_programming_for_ai\src\models" />
+      <recent name="C:\python\project_programming_for_ai\temp_data\exports\development_analysis" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.diagnostic_market">
+    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/models/bnn" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/__init__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="diagnostic_market" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/diagnostic" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/diagnostic/diagnostic_market.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="history_view" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/models/bnn" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/history_view.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="parser_arrow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ingesting" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ingesting/parser_arrow.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="trainer_start_flexible" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/models/bnn" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/trainer_start_flexible.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.diagnostic_market" />
+        <item itemvalue="Python.parser_arrow" />
+        <item itemvalue="Python.history_view" />
+        <item itemvalue="Python.trainer_start_flexible" />
+        <item itemvalue="Python.__init__" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4c141bd692a7-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
+      <created>1763504844118</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763504844118</updated>
+    </task>
+    <servers />
+  </component>
+</project>

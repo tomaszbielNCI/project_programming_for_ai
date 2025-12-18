@@ -1,0 +1,27 @@
+# Project settings
+project:
+  name: "project_programming_for_ai"
+  version: "0.1.0"
+  description: "AI project for university with market and custom data random_forest"
+
+data:
+  # Data A (Market data) settings
+  a:
+    timeframes: ["1m", "5m", "15m", "1h", "1d"]
+    features: ["open", "high", "low", "close", "volume"]
+    
+  # Data B (University data) settings
+  b:
+    target_column: "target"
+    
+# Model settings
+model:
+  random_seed: 42
+  test_size: 0.2
+  validation_size: 0.1
+  
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "../logs/project.log"

@@ -1,0 +1,266 @@
+Lista wszystkich krajów/regionów:
+  1. Afghanistan
+  2. Africa Eastern and Southern
+  3. Africa Western and Central
+  4. Albania
+  5. Algeria
+  6. American Samoa
+  7. Andorra
+  8. Angola
+  9. Antigua and Barbuda
+ 10. Arab World
+ 11. Argentina
+ 12. Armenia
+ 13. Aruba
+ 14. Australia
+ 15. Austria
+ 16. Azerbaijan
+ 17. Bahamas, The
+ 18. Bahrain
+ 19. Bangladesh
+ 20. Barbados
+ 21. Belarus
+ 22. Belgium
+ 23. Belize
+ 24. Benin
+ 25. Bermuda
+ 26. Bhutan
+ 27. Bolivia
+ 28. Bosnia and Herzegovina
+ 29. Botswana
+ 30. Brazil
+ 31. British Virgin Islands
+ 32. Brunei Darussalam
+ 33. Bulgaria
+ 34. Burkina Faso
+ 35. Burundi
+ 36. Cabo Verde
+ 37. Cambodia
+ 38. Cameroon
+ 39. Canada
+ 40. Caribbean small states
+ 41. Cayman Islands
+ 42. Central African Republic
+ 43. Central Europe and the Baltics
+ 44. Chad
+ 45. Channel Islands
+ 46. Chile
+ 47. China
+ 48. Colombia
+ 49. Comoros
+ 50. Congo, Dem. Rep.
+ 51. Congo, Rep.
+ 52. Costa Rica
+ 53. Cote d'Ivoire
+ 54. Croatia
+ 55. Cuba
+ 56. Curacao
+ 57. Cyprus
+ 58. Czechia
+ 59. Denmark
+ 60. Djibouti
+ 61. Dominica
+ 62. Dominican Republic
+ 63. Early-demographic dividend
+ 64. East Asia & Pacific
+ 65. East Asia & Pacific (IDA & IBRD countries)
+ 66. East Asia & Pacific (excluding high income)
+ 67. Ecuador
+ 68. Egypt, Arab Rep.
+ 69. El Salvador
+ 70. Equatorial Guinea
+ 71. Eritrea
+ 72. Estonia
+ 73. Eswatini
+ 74. Ethiopia
+ 75. Euro area
+ 76. Europe & Central Asia
+ 77. Europe & Central Asia (IDA & IBRD countries)
+ 78. Europe & Central Asia (excluding high income)
+ 79. European Union
+ 80. Faroe Islands
+ 81. Fiji
+ 82. Finland
+ 83. Fragile and conflict affected situations
+ 84. France
+ 85. French Polynesia
+ 86. Gabon
+ 87. Gambia, The
+ 88. Georgia
+ 89. Germany
+ 90. Ghana
+ 91. Gibraltar
+ 92. Greece
+ 93. Greenland
+ 94. Grenada
+ 95. Guam
+ 96. Guatemala
+ 97. Guinea
+ 98. Guinea-Bissau
+ 99. Guyana
+100. Haiti
+101. Heavily indebted poor countries (HIPC)
+102. High income
+103. Honduras
+104. Hong Kong SAR, China
+105. Hungary
+106. IBRD only
+107. IDA & IBRD total
+108. IDA blend
+109. IDA only
+110. IDA total
+111. Iceland
+112. India
+113. Indonesia
+114. Iran, Islamic Rep.
+115. Iraq
+116. Ireland
+117. Isle of Man
+118. Israel
+119. Italy
+120. Jamaica
+121. Japan
+122. Jordan
+123. Kazakhstan
+124. Kenya
+125. Kiribati
+126. Korea, Dem. People's Rep.
+127. Korea, Rep.
+128. Kosovo
+129. Kuwait
+130. Kyrgyz Republic
+131. Lao PDR
+132. Late-demographic dividend
+133. Latin America & Caribbean
+134. Latin America & Caribbean (excluding high income)
+135. Latin America & the Caribbean (IDA & IBRD countries)
+136. Latvia
+137. Least developed countries: UN classification
+138. Lebanon
+139. Lesotho
+140. Liberia
+141. Libya
+142. Liechtenstein
+143. Lithuania
+144. Low & middle income
+145. Low income
+146. Lower middle income
+147. Luxembourg
+148. Macao SAR, China
+149. Madagascar
+150. Malawi
+151. Malaysia
+152. Maldives
+153. Mali
+154. Malta
+155. Marshall Islands
+156. Mauritania
+157. Mauritius
+158. Mexico
+159. Micronesia, Fed. Sts.
+160. Middle East, North Africa, Afghanistan & Pakistan
+161. Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)
+162. Middle East, North Africa, Afghanistan & Pakistan (excluding high income)
+163. Middle income
+164. Moldova
+165. Monaco
+166. Mongolia
+167. Montenegro
+168. Morocco
+169. Mozambique
+170. Myanmar
+171. Namibia
+172. Nauru
+173. Nepal
+174. Netherlands
+175. New Caledonia
+176. New Zealand
+177. Nicaragua
+178. Niger
+179. Nigeria
+180. North America
+181. North Macedonia
+182. Northern Mariana Islands
+183. Norway
+184. OECD members
+185. Oman
+186. Other small states
+187. Pacific island small states
+188. Pakistan
+189. Palau
+190. Panama
+191. Papua New Guinea
+192. Paraguay
+193. Peru
+194. Philippines
+195. Poland
+196. Portugal
+197. Post-demographic dividend
+198. Pre-demographic dividend
+199. Puerto Rico (US)
+200. Qatar
+201. Romania
+202. Russian Federation
+203. Rwanda
+204. Samoa
+205. San Marino
+206. Sao Tome and Principe
+207. Saudi Arabia
+208. Senegal
+209. Serbia
+210. Seychelles
+211. Sierra Leone
+212. Singapore
+213. Sint Maarten (Dutch part)
+214. Slovak Republic
+215. Slovenia
+216. Small states
+217. Solomon Islands
+218. Somalia, Fed. Rep.
+219. South Africa
+220. South Asia
+221. South Asia (IDA & IBRD)
+222. South Sudan
+223. Spain
+224. Sri Lanka
+225. St. Kitts and Nevis
+226. St. Lucia
+227. St. Martin (French part)
+228. St. Vincent and the Grenadines
+229. Sub-Saharan Africa
+230. Sub-Saharan Africa (IDA & IBRD countries)
+231. Sub-Saharan Africa (excluding high income)
+232. Sudan
+233. Suriname
+234. Sweden
+235. Switzerland
+236. Syrian Arab Republic
+237. Tajikistan
+238. Tanzania
+239. Thailand
+240. Timor-Leste
+241. Togo
+242. Tonga
+243. Trinidad and Tobago
+244. Tunisia
+245. Turkiye
+246. Turkmenistan
+247. Turks and Caicos Islands
+248. Tuvalu
+249. Uganda
+250. Ukraine
+251. United Arab Emirates
+252. United Kingdom
+253. United States
+254. Upper middle income
+255. Uruguay
+256. Uzbekistan
+257. Vanuatu
+258. Venezuela, RB
+259. Viet Nam
+260. Virgin Islands (U.S.)
+261. West Bank and Gaza
+262. World
+263. Yemen, Rep.
+264. Zambia
+265. Zimbabwe

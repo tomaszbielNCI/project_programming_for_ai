@@ -1,0 +1,250 @@
+DATA SUMMARY REPORT
+Folder: C:\python\project_programming_for_ai\mongo\data\development_analysis
+
+=== consumption_raw.csv ===
+Path: C:\python\project_programming_for_ai\mongo\data\development_analysis\consumption_raw.csv
+Shape: (6569, 5)
+
+[df.info]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 6569 entries, 0 to 6568
+Data columns (total 5 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   _id         6569 non-null   object 
+ 1   country     6569 non-null   object 
+ 2   code        6569 non-null   object 
+ 3   year        6569 non-null   int64  
+ 4   energy_use  6569 non-null   float64
+dtypes: float64(1), int64(1), object(3)
+memory usage: 256.7+ KB
+
+[head(5)]
+                        _id                         country code  year   energy_use
+0  691d33fd3de74aff30dbc99c     Africa Eastern and Southern  AFE  1990   693.869545
+1  691d33fd3de74aff30dbc99d      Africa Western and Central  AFW  1990   296.775482
+2  691d33fd3de74aff30dbc99e                      Arab World  ARB  1990  1094.395258
+3  691d33fd3de74aff30dbc99f          Caribbean small states  CSS  1990  2378.965919
+4  691d33fd3de74aff30dbc9a0  Central Europe and the Baltics  CEB  1990  3096.329379
+
+[missing by column]
+_id           0
+country       0
+code          0
+year          0
+energy_use    0
+
+[missing % by column]
+_id           0.00%
+country       0.00%
+code          0.00%
+year          0.00%
+energy_use    0.00%
+
+[numeric describe]
+             count         mean          std     min          25%          50%         75%           max
+year        6569.0  2006.244329     9.591241  1990.0  1998.000000  2006.000000  2014.00000   2023.000000
+energy_use  6569.0  2170.288430  2645.764144     0.0   509.245127  1180.710719  2770.35925  21557.475076
+
+Duplicate rows: 0
+
+[model suitability opinion]
+Linear Regression suitability: Yes
+Random Forest suitability: Yes
+Notes: Weak linear correlation between features and target — LR may underperform; RF still fine.
+
+=== emissions_raw.csv ===
+Path: C:\python\project_programming_for_ai\mongo\data\development_analysis\emissions_raw.csv
+Shape: (26509, 4)
+
+[df.info]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 26509 entries, 0 to 26508
+Data columns (total 4 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   _id        26509 non-null  object 
+ 1   country    26509 non-null  object 
+ 2   year       26509 non-null  int64  
+ 3   emissions  26509 non-null  float64
+dtypes: float64(1), int64(1), object(2)
+memory usage: 828.5+ KB
+
+[head(5)]
+                        _id      country  year  emissions
+0  691d34093de74aff30dbe345  Afghanistan  1949      0.002
+1  691d34093de74aff30dbe346  Afghanistan  1950      0.011
+2  691d34093de74aff30dbe347  Afghanistan  1951      0.012
+3  691d34093de74aff30dbe348  Afghanistan  1952      0.011
+4  691d34093de74aff30dbe349  Afghanistan  1953      0.013
+
+[missing by column]
+_id          0
+country      0
+year         0
+emissions    0
+
+[missing % by column]
+_id          0.00%
+country      0.00%
+year         0.00%
+emissions    0.00%
+
+[numeric describe]
+             count         mean        std     min       25%       50%       75%       max
+year       26509.0  1953.103889  53.617340  1750.0  1919.000  1966.000  1996.000  2024.000
+emissions  26509.0     3.821369  14.312866     0.0     0.171     1.023     4.327   782.743
+
+Duplicate rows: 0
+
+[model suitability opinion]
+Linear Regression suitability: Yes
+Random Forest suitability: Yes
+Notes: No major issues detected for a baseline run.
+
+=== energy_raw.csv ===
+Path: C:\python\project_programming_for_ai\mongo\data\development_analysis\energy_raw.csv
+Shape: (7868, 4)
+
+[df.info]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7868 entries, 0 to 7867
+Data columns (total 4 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   _id            7868 non-null   object 
+ 1   country        7868 non-null   object 
+ 2   year           7868 non-null   int64  
+ 3   renewable_pct  7868 non-null   float64
+dtypes: float64(1), int64(1), object(2)
+memory usage: 246.0+ KB
+
+[head(5)]
+                        _id        country  year  renewable_pct
+0  691d336f3de74aff30db67b5  ASEAN (Ember)  2000          6.022
+1  691d336f3de74aff30db67b6  ASEAN (Ember)  2001          5.647
+2  691d336f3de74aff30db67b7  ASEAN (Ember)  2002          5.363
+3  691d336f3de74aff30db67b8  ASEAN (Ember)  2003          5.061
+4  691d336f3de74aff30db67b9  ASEAN (Ember)  2004          5.029
+
+[missing by column]
+_id              0
+country          0
+year             0
+renewable_pct    0
+
+[missing % by column]
+_id              0.00%
+country          0.00%
+year             0.00%
+renewable_pct    0.00%
+
+[numeric describe]
+                count         mean        std     min     25%        50%        75%       max
+year           7868.0  2007.580707  10.369307  1985.0  2001.0  2008.0000  2016.0000  2024.000
+renewable_pct  7868.0     2.317317   5.992743     0.0     0.0     0.2205     1.7845    77.586
+
+Duplicate rows: 0
+
+[model suitability opinion]
+Linear Regression suitability: Yes
+Random Forest suitability: Yes
+Notes: No major issues detected for a baseline run.
+
+=== population_raw.csv ===
+Path: C:\python\project_programming_for_ai\mongo\data\development_analysis\population_raw.csv
+Shape: (17195, 5)
+
+[df.info]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 17195 entries, 0 to 17194
+Data columns (total 5 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   _id         17195 non-null  object 
+ 1   country     17195 non-null  object 
+ 2   code        17195 non-null  object 
+ 3   year        17195 non-null  int64  
+ 4   population  17195 non-null  float64
+dtypes: float64(1), int64(1), object(3)
+memory usage: 671.8+ KB
+
+[head(5)]
+                        _id                         country code  year   population
+0  691d33c53de74aff30db8671     Africa Eastern and Southern  AFE  1960  130075728.0
+1  691d33c53de74aff30db8672      Africa Western and Central  AFW  1960   97630925.0
+2  691d33c53de74aff30db8673                      Arab World  ARB  1960   91540853.0
+3  691d33c53de74aff30db8674          Caribbean small states  CSS  1960    2558348.0
+4  691d33c53de74aff30db8675  Central Europe and the Baltics  CEB  1960   91401309.0
+
+[missing by column]
+_id           0
+country       0
+code          0
+year          0
+population    0
+
+[missing % by column]
+_id           0.00%
+country       0.00%
+code          0.00%
+year          0.00%
+population    0.00%
+
+[numeric describe]
+              count          mean           std     min        25%        50%         75%           max
+year        17195.0  1.992031e+03  1.876083e+01  1960.0     1976.0     1992.0      2008.0  2.024000e+03
+population  17195.0  2.182403e+08  7.142245e+08  2715.0  1019463.0  6790788.0  47065785.0  8.142056e+09
+
+Duplicate rows: 0
+
+[model suitability opinion]
+Linear Regression suitability: Yes
+Random Forest suitability: Yes
+Notes: Weak linear correlation between features and target — LR may underperform; RF still fine.
+
+=== temperature_raw.csv ===
+Path: C:\python\project_programming_for_ai\mongo\data\development_analysis\temperature_raw.csv
+Shape: (145, 3)
+
+[df.info]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 145 entries, 0 to 144
+Data columns (total 3 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   _id           145 non-null    object 
+ 1   year          145 non-null    int64  
+ 2   temp_anomaly  145 non-null    float64
+dtypes: float64(1), int64(1), object(1)
+memory usage: 3.5+ KB
+
+[head(5)]
+                        _id  year  temp_anomaly
+0  691d34103de74aff30dc4ad2  1880         -0.18
+1  691d34103de74aff30dc4ad3  1881         -0.09
+2  691d34103de74aff30dc4ad4  1882         -0.11
+3  691d34103de74aff30dc4ad5  1883         -0.17
+4  691d34103de74aff30dc4ad6  1884         -0.28
+
+[missing by column]
+_id             0
+year            0
+temp_anomaly    0
+
+[missing % by column]
+_id             0.00%
+year            0.00%
+temp_anomaly    0.00%
+
+[numeric describe]
+              count         mean        std      min     25%      50%      75%      max
+year          145.0  1952.000000  42.001984  1880.00  1916.0  1952.00  1988.00  2024.00
+temp_anomaly  145.0     0.072069   0.390981    -0.49    -0.2    -0.03     0.31     1.28
+
+Duplicate rows: 0
+
+[model suitability opinion]
+Linear Regression suitability: Yes
+Random Forest suitability: Yes
+Notes: Low sample size (145 rows).

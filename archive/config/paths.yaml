@@ -1,0 +1,21 @@
+# Configuration for file paths and directories
+
+# Data directories
+data:
+  raw_a: "../data/raw_a"
+  raw_b: "../data/raw_b"
+  processed_a: "../data/processed_a"
+  processed_b: "../data/processed_b"
+
+# Model directories
+models:
+  saved: "../models/saved"
+  logs: "../models/logs"
+  predictions: "../models/predictions"
+
+# Source directories
+src:
+  analysis: "../src/random_forest"
+  simulation: "../src/simulation"
+  deployment: "../src/deployment"
+  utils: "../src/utils"
