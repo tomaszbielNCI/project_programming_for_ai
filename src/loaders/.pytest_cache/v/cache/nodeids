@@ -1,0 +1,7 @@
+[
+  "próba.py::test_atlas_connection",
+  "próba.py::test_csv_loading",
+  "próba2.py::test_data_io",
+  "próba2.py::test_mongo_atlas",
+  "test_data_IO.py::test_mongo_atlas"
+]

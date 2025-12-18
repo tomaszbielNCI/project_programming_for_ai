@@ -1,0 +1,6 @@
+[
+  "test_connection.py::TestMongoDBConnection::test_connection_failure",
+  "test_connection.py::TestMongoDBConnection::test_connection_success",
+  "test_connection.py::test_connection",
+  "test_connection_final.py::test_connection"
+]

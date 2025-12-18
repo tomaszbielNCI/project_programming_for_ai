@@ -1,0 +1,2 @@
+total_countries,avg_obs_per_country,min_obs,max_obs,stationary_countries,stationary_pct,autocorrelation_countries,autocorrelation_pct,avg_r2,median_r2,r2_below_05,increasing_trend,decreasing_trend
+141,33.0,33,33,23,16.312056737588655,127,90.0709219858156,0.8315705653109322,0.9163078455622292,11,82,59
