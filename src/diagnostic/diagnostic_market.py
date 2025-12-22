@@ -128,6 +128,7 @@ print(f"Excluded returns due to gaps: {df['is_gap'].sum()}")
 # ======================================================
 # Why:
 # - Detect outliers, feed interruptions, structural breaks
+
 # - Verify data consistency before any statistical inference
 
 plt.figure(figsize=(12,4))

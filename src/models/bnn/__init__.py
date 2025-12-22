@@ -1,7 +1,7 @@
 
 from pathlib import Path
 import numpy as np
-from .model import build_bnn_showcase
+from .model_v1 import build_bnn_showcase
 from src.loaders.bnn_basic_loader import load_parquet_for_bnn
 import joblib
 

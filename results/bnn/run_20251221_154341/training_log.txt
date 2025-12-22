@@ -1,0 +1,12 @@
+
+RUN ID: 20251221_154341
+Model training completed at: 2025-12-21 15:43:41
+Data file: C:\python\project_programming_for_ai\data\parsed\US.100+1.parquet
+Window size: 120, Target horizon: 30
+Batch size: 128, Epochs: 5
+
+Training completed successfully!
+Final training loss: -4.681657
+Final validation loss: -4.991663
+
+All results saved to: C:\python\project_programming_for_ai\results\bnn\run_20251221_154341

@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
+    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/hfd/mt4_raw_20251218.log" beforeDir="false" afterPath="$PROJECT_DIR$/data/hfd/mt4_raw_20251218.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/diagnostic/diagnostic_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/diagnostic/diagnostic_market.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loaders/bnn_basic_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders/bnn_basic_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/fingerprint.pb" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/fingerprint.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/saved_model.pb" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/saved_model.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/variables/variables.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/variables/variables.index" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/bnn_laplace_model/variables/variables.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/history.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/history.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/trainer_start_flexible.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/trainer_start_flexible.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,7 +137,7 @@
       <recent name="C:\python\project_programming_for_ai\temp_data\exports\development_analysis" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.diagnostic_market">
+  <component name="RunManager" selected="Python.trainer_start_flexible">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
@@ -239,10 +250,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.trainer_start_flexible" />
         <item itemvalue="Python.diagnostic_market" />
         <item itemvalue="Python.parser_arrow" />
         <item itemvalue="Python.history_view" />
-        <item itemvalue="Python.trainer_start_flexible" />
         <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
