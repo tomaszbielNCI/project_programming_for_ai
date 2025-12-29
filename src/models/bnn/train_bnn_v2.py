@@ -8,7 +8,7 @@ import shutil
 import os
 
 from src.loaders.bnn_basic_loader import load_parquet_for_bnn
-from src.models.bnn.model_v1 import build_bnn_showcase
+from src.models.bnn.model_v2 import build_bnn_showcase
 
 
 # ======================================================

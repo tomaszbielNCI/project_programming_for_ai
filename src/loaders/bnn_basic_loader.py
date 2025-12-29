@@ -35,11 +35,12 @@ def load_parquet_for_bnn(
     df = df.sort_values("timestamp").reset_index(drop=True)
 
     # --- 2. Core signal ---
+    # In bnn_basic_loader.py, replace lines 34-36 with:
     log_mid = np.log(df["mid"].values)
-    log_return = np.diff(log_mid)
-    df = df.iloc[1:].reset_index(drop=True)
+    log_return = np.zeros_like(log_mid)
+    log_return[1:] = log_mid[1:] - log_mid[:-1]  # Properly aligned log-returns
     df["log_return"] = log_return.astype("float32")
-
+    df = df.iloc[1:].reset_index(drop=True)  # Drop the first row with NaN return
     # --- 3. Detect gaps ---
     if intraday:
         # Intraday bars (1m / 5m / 15m / 60m):
