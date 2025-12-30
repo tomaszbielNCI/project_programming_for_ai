@@ -6,8 +6,9 @@ def load_parquet_for_bnn(
     window: int = 20,
     vol_window: int = 20,
     target_horizon: int = 1,
-    max_gap_s: float = 5.0,  # seconds, threshold for timestamp continuity
-    return_window_timestamps=False
+    max_gap_s: float = 5.0,  # seconds, threshold for HFD gaps
+    intraday: bool = False,  # <-- NEW SWITCH
+    return_window_timestamps=False # <-- NEW SWITCH
 ):
     """
     Universal loader for Bayesian NN
@@ -20,7 +21,13 @@ def load_parquet_for_bnn(
         window (int, optional): Number of lookback periods for features. Defaults to 20.
         vol_window (int, optional): Window size for volatility calculation. Defaults to 20.
         target_horizon (int, optional): Number of periods ahead to predict. Defaults to 1.
-        max_gap_s (float, optional): Maximum allowed gap (seconds) between consecutive timestamps.
+        max_gap_s (float, optional): Maximum allowed gap (seconds) between consecutive timestamps. Defaults to 5.0.
+        intraday (bool, optional): If True, treats data as intraday (1m/5m/15m/60m) and handles gaps differently. Defaults to False.
+
+    Returns:
+        tuple: (X, y) where
+            - X : numpy.ndarray of shape [samples, window, features]
+            - y : numpy.ndarray of shape [samples] containing target values
     """
 
     # --- 1. Load minimum required columns ---
@@ -28,18 +35,23 @@ def load_parquet_for_bnn(
     df = df.sort_values("timestamp").reset_index(drop=True)
 
     # --- 2. Core signal ---
+    # In bnn_basic_loader_0.1.py, replace lines 34-36 with:
     log_mid = np.log(df["mid"].values)
     log_return = np.zeros_like(log_mid)
-    log_return[1:] = log_mid[1:] - log_mid[:-1]
+    log_return[1:] = log_mid[1:] - log_mid[:-1]  # Properly aligned log-returns
     df["log_return"] = log_return.astype("float32")
-    df = df.iloc[1:].reset_index(drop=True)
-
+    df = df.iloc[1:].reset_index(drop=True)  # Drop the first row with NaN return
     # --- 3. Detect gaps ---
-    # Unified gap detection for all data types.
-    # Any gap larger than max_gap_s breaks return continuity and starts a new segment.
-    dt = df["timestamp"].diff().dt.total_seconds().fillna(0)
-    valid_return = dt <= max_gap_s
-    valid_return.iloc[0] = True  # first value is always valid
+    if intraday:
+        # Intraday bars (1m / 5m / 15m / 60m):
+        # market closures create large timestamp jumps,
+        # but returns remain economically valid
+        valid_return = np.ones(len(df), dtype=bool)
+    else:
+        # HFD: timestamp gaps break return semantics
+        dt = df["timestamp"].diff().dt.total_seconds().fillna(0)
+        valid_return = dt <= max_gap_s
+        valid_return.iloc[0] = True  # first value is always valid
 
     df["valid_return"] = valid_return
 
@@ -52,14 +64,14 @@ def load_parquet_for_bnn(
     df = df.dropna().reset_index(drop=True)
 
     # --- 6. Segment by gaps ---
-    segment_ids = np.cumsum(~df["valid_return"].values)
+    segment_ids = np.cumsum(~df["valid_return"].values)  # increment at each invalid return
     X_list = []
     y_list = []
 
     for seg_id in np.unique(segment_ids):
         seg_df = df[segment_ids == seg_id]
         if len(seg_df) < window + target_horizon:
-            continue
+            continue  # skip too short segments
 
         features = seg_df[["log_return", "volatility", "activity"]].values.astype("float32")
         target = seg_df["log_return"].values.astype("float32")
@@ -80,10 +92,9 @@ def load_parquet_for_bnn(
     y = np.concatenate(y_list, axis=0)
 
     if return_window_timestamps:
-        ts_windows = df["timestamp"].values[
-            window + target_horizon - 1 :
-            window + target_horizon - 1 + X.shape[0]
-        ]
+        # timestamps dla każdego okna (ostatni timestamp w oknie + horizon)
+        ts_windows = df["timestamp"].values[window + target_horizon - 1: window + target_horizon - 1 + X.shape[0]]
         return X, y, ts_windows
     else:
         return X, y
+

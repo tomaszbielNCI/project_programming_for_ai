@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/models/bnn/model_v2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_v2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_minimal.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/loaders/bnn_basic_loader_0.1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/loaders/bnn_basic_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders/bnn_basic_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/history.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/history_view.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +140,7 @@
       <recent name="C:\python\project_programming_for_ai\temp_data\exports\development_analysis" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.viz_bnn_predictions_minimal (1)">
+  <component name="RunManager" selected="Python.train_bnn_v2">
     <configuration name="bnn_basic_loader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
@@ -258,11 +253,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train_bnn_v2" />
+        <item itemvalue="Python.bnn_basic_loader" />
         <item itemvalue="Python.viz_bnn_predictions_minimal (1)" />
         <item itemvalue="Python.predict_rolling_bnn_v2" />
-        <item itemvalue="Python.train_bnn_v2" />
         <item itemvalue="Python.model_v2" />
-        <item itemvalue="Python.bnn_basic_loader" />
       </list>
     </recent_temporary>
   </component>
