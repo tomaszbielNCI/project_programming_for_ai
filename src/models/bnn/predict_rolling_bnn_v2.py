@@ -89,6 +89,20 @@ model = build_bnn_showcase(window=WINDOW, feature_count=X.shape[2], train_size=l
 model.load_weights(str(MODEL_DIR / "variables" / "variables"))
 
 # ----------------------------
+# TEST DISTRIBUTION
+# ----------------------------
+print("\n=== MODEL DISTRIBUTION TEST ===")
+test_dist = model(X[:1])
+print(f"Distribution type: {test_dist.__class__.__name__}")
+print(f"Distribution parameters: {test_dist.parameters}")
+
+# Sprawdź bazową dystrybucję jeśli to Independent
+if hasattr(test_dist, 'distribution'):
+    base = test_dist.distribution
+    print(f"Base distribution: {base.__class__.__name__}")
+    print(f"Base parameters: {base.parameters}")
+
+# ----------------------------
 # WALK FORWARD OUT-OF-SAMPLE
 # ----------------------------
 predicted_means = []
@@ -98,7 +112,7 @@ pred_timestamps = []
 step = TARGET_HORIZON
 n_samples = len(X)
 
-print("Starting walk-forward prediction…")
+print("\nStarting walk-forward prediction…")
 
 for i in range(start_index, n_samples - WINDOW, step):
     end = i + WINDOW
@@ -114,6 +128,35 @@ for i in range(start_index, n_samples - WINDOW, step):
     predicted_means.append(mean)
     predicted_stds.append(std)
     pred_timestamps.append(t_pred)
+
+# Debug info for the last prediction
+dist = model(X_window)
+mean = dist.mean().numpy().flatten()[0]
+std = dist.stddev().numpy().flatten()[0]
+
+# Check distribution type and parameters
+try:
+    if hasattr(dist, 'distribution') and hasattr(dist.distribution, 'scale'):
+        # For Independent distributions
+        scale_param = dist.distribution.scale.numpy().flatten()[0]
+        std_from_scale = scale_param * np.sqrt(2)  # For Laplace distribution
+        print(f"Distribution type: {type(dist.distribution).__name__}")
+        print(f"mean: {mean:.6f}, scale: {scale_param:.6f}, std_from_scale: {std_from_scale:.6f}, current_std: {std:.6f}")
+        print(f"std == scale*sqrt(2)? {np.abs(std - std_from_scale) < 1e-6}")
+    else:
+        # For other distribution types
+        print(f"Distribution type: {type(dist).__name__}")
+        print(f"mean: {mean:.6f}, std: {std:.6f}")
+        
+        # Try to get scale if available through other means
+        if hasattr(dist, 'scale'):
+            scale_param = dist.scale.numpy().flatten()[0]
+            print(f"scale: {scale_param:.6f}")
+        
+        print("Note: Direct scale parameter access not available for this distribution type")
+        
+except Exception as e:
+    print(f"Error accessing distribution parameters: {e}")
 
 # ----------------------------
 # SAVE RESULTS

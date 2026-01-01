@@ -46,12 +46,12 @@ PARSED_DIR = PROJECT_ROOT / "data" / "parsed"
 RESULTS_DIR = PROJECT_ROOT / "results" / "diagnostic_market"
 
 # ---- ACTIVE DATASET (DEFAULT: HFD) ----
-SYMBOL = "US.100"
-TIMEFRAME = "HFD"
+#SYMBOL = "US.100"
+#TIMEFRAME = "HFD"
 
 # ---- OPTIONAL (UNCOMMENT TO RUN) ----
-# SYMBOL = "NASDAQ"
-# TIMEFRAME = "1m"
+SYMBOL = "US.100"
+TIMEFRAME = "1m"
 
 # SYMBOL = "NASDAQ"
 # TIMEFRAME = "15m"

@@ -47,7 +47,8 @@ def build_bnn_showcase(window=20, feature_count=3, train_size=30000):
         lambda t: tfd.Independent(
             tfd.Laplace(loc=t[0], scale=t[1]),
             reinterpreted_batch_ndims=1
-        )
+        ),
+        convert_to_tensor_fn=tfd.Distribution.mean  # Dodano konwersję do tensora
     )([mu, scale])
 
     # --------------------------------------------------
