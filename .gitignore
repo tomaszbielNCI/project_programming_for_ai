@@ -57,7 +57,8 @@ ENV/
 .venv/
 
 # IDE
-.idea/
+.idea/*
+!.idea/workspace.xml
 .vscode/
 *.swp
 *.swo
