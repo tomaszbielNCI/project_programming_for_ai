@@ -4,7 +4,84 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
+    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033136/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033136/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033136/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033136/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033136/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033355/model/variables/variables_temp/part-00000-of-00001.data-00000-of-00001.tempstate13088801147422058914" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033936/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033936/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033936/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033936/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_033936/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_035802/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_035802/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_035802/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_035802/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_035802/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_040643/model/variables/variables_temp/part-00000-of-00001.data-00000-of-00001.tempstate8919207724010322661" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_040710/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_040710/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_040710/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_040710/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_040710/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114220/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114220/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114220/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114220/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114220/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114515/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114515/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114515/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114515/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251230_114515/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174711/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174711/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174711/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174711/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174711/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174825/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174825/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174825/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174825/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_174825/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232548/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232548/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232548/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232548/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232548/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232626/model/variables/variables_temp/part-00000-of-00001.data-00000-of-00001.tempstate8728237487528800402" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232741/model/variables/variables_temp/part-00000-of-00001.data-00000-of-00001.tempstate16408109949540639010" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232909/model/fingerprint.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232909/model/keras_metadata.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232909/model/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232909/model/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/bnn/train_v2_20251231_232909/model/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205637/US.100_HFD_acf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205637/US.100_HFD_distfit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205637/US.100_HFD_price.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205637/US.100_HFD_returns.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205637/summary.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205751/summary.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205832/US.100_1m_acf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205832/US.100_1m_distfit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205832/US.100_1m_price.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205832/US.100_1m_returns.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/diagnostic_market/run_20251231_205832/summary.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/bnn/model_diagnostics_summary.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/bnn/price_trajectory_visualization.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/bnn/returns_space_visualization.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/diagnostic/diagnostic_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/diagnostic/diagnostic_market.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loaders/bnn_basic_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders/bnn_basic_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/model_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/model_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,6 +136,7 @@
     "Python tests.Python tests in test_data_IO.py.executor": "Run",
     "Python.__init__.executor": "Run",
     "Python.analyze_poland_temps.executor": "Run",
+    "Python.bnn_basic_loader.executor": "Run",
     "Python.check_atlas.executor": "Run",
     "Python.check_databases.executor": "Run",
     "Python.cleaning.executor": "Run",
@@ -77,6 +155,7 @@
     "Python.list_databases.executor": "Run",
     "Python.mała_wizualizacja _temperatury.executor": "Run",
     "Python.mały_test.executor": "Run",
+    "Python.model_v2.executor": "Run",
     "Python.mongo_atlas_example.executor": "Run",
     "Python.mongo_loader.executor": "Run",
     "Python.move_rf_results.executor": "Run",
@@ -91,6 +170,8 @@
     "Python.parser.executor": "Run",
     "Python.parser_arrow.executor": "Run",
     "Python.parser_historical.executor": "Run",
+    "Python.pomoc_wizualizacja.executor": "Run",
+    "Python.predict_rolling_bnn_v2.executor": "Run",
     "Python.preprocessing.executor": "Run",
     "Python.próba.executor": "Run",
     "Python.próba2.executor": "Run",
@@ -102,8 +183,15 @@
     "Python.sync_from_atlas.executor": "Run",
     "Python.sync_results_to_atlas.executor": "Run",
     "Python.sync_temp_data.executor": "Run",
+    "Python.train_bnn_v2.executor": "Run",
     "Python.trainer_start_flexible.executor": "Run",
+    "Python.visualize_bnn_predictions.executor": "Run",
+    "Python.visualize_bnn_predictions_v1.1 (1).executor": "Run",
+    "Python.visualize_bnn_predictions_v1.1.executor": "Run",
+    "Python.visualize_bnn_predictions_v1.executor": "Run",
     "Python.visualize_temperatures.executor": "Run",
+    "Python.viz_bnn_predictions.executor": "Run",
+    "Python.viz_bnn_predictions_minimal (1).executor": "Run",
     "Python.worldbank_data.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -126,29 +214,7 @@
       <recent name="C:\python\project_programming_for_ai\temp_data\exports\development_analysis" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.diagnostic_market">
-    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="project_programming_for_ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/models/bnn" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/__init__.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.viz_bnn_predictions">
     <configuration name="diagnostic_market" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
@@ -171,7 +237,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="history_view" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="predict_rolling_bnn_v2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -184,7 +250,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/history_view.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_v2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -193,29 +259,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="parser_arrow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="project_programming_for_ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ingesting" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ingesting/parser_arrow.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="trainer_start_flexible" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="train_bnn_v2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -228,7 +272,51 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/trainer_start_flexible.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="viz_bnn_predictions" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/models/bnn" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="viz_bnn_predictions_minimal (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/models/bnn" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_minimal.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -239,11 +327,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.viz_bnn_predictions" />
+        <item itemvalue="Python.predict_rolling_bnn_v2" />
+        <item itemvalue="Python.train_bnn_v2" />
         <item itemvalue="Python.diagnostic_market" />
-        <item itemvalue="Python.parser_arrow" />
-        <item itemvalue="Python.history_view" />
-        <item itemvalue="Python.trainer_start_flexible" />
-        <item itemvalue="Python.__init__" />
+        <item itemvalue="Python.viz_bnn_predictions_minimal (1)" />
       </list>
     </recent_temporary>
   </component>
