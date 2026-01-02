@@ -1,0 +1,9 @@
+Run completed at: 2026-01-02 13:59:31
+Prediction file: rolling_predictions_20251231_232933.pkl
+Instrument: US.100
+Timeframe: 1
+Number of predictions: 226
+Bias correction: 0.000793
+Calibration score: 0.8274
+Within +/-1std: 98.7% (expected 68.3%)
+Within +/-2std: 99.6% (expected 95.4%)

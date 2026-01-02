@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ingesting/parser_historical_0.1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/parsed/US.100+5.parquet" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ingesting/parser_historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ingesting/parser_historical.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" afterDir="false" />
-    </list>
+    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
