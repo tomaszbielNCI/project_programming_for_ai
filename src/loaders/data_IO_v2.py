@@ -8,7 +8,8 @@ from pathlib import Path
 import pandas as pd
 from pymongo import MongoClient
 from dotenv import load_dotenv
-
+from datetime import datetime
+import hashlib
 # Load env
 load_dotenv()
 
@@ -24,53 +25,95 @@ class DataIOv2:
 
     # SYNC FUNCTIONS
     def sync_csv(self, csv_path: Path, instrument: str, timeframe: str):
-        """Sync CSV file to MongoDB as-is."""
+        """Sync CSV file to MongoDB with duplicate checking."""
+        # Read CSV
         df = pd.read_csv(csv_path, header=None)
         df.columns = ['date', 'time', 'open', 'high', 'low', 'close', 'volume']
 
-        # Add minimal metadata
+        # Create unique hash for each row
+        df['_hash'] = df.apply(
+            lambda x: hashlib.md5(
+                f"{x['date']}{x['time']}{x['open']}{x['high']}{x['low']}{x['close']}".encode()
+            ).hexdigest(),
+            axis=1
+        )
+
+        # Add metadata
         df['_source'] = csv_path.name
         df['instrument'] = instrument
         df['timeframe'] = timeframe
+        df['ingest_time'] = datetime.utcnow()
 
-        # Collection name
+        # Get existing hashes
         coll_name = f"csv_{instrument}_{timeframe}".replace('.', '_')
+        existing_hashes = set()
 
-        # Delete old, insert new
-        self.db[coll_name].delete_many({'_source': csv_path.name})
-        self.db[coll_name].insert_many(df.to_dict('records'))
+        if self.db[coll_name].count_documents({}) > 0:
+            existing_hashes = set(doc['_hash'] for doc in
+                                  self.db[coll_name].find(
+                                      {'_source': csv_path.name},
+                                      {'_hash': 1, '_id': 0}
+                                  ))
 
-        return len(df)
+        # Filter out duplicates
+        new_data = df[~df['_hash'].isin(existing_hashes)].to_dict('records')
+
+        # Insert new records
+        if new_data:
+            self.db[coll_name].insert_many(new_data, ordered=False)
+
+        return len(new_data)
 
     def sync_log(self, log_path: Path):
-        """Sync log file to MongoDB as-is."""
+        """Sync log file to MongoDB with duplicate checking based on raw content."""
+        from datetime import datetime
+        log_path = Path(log_path) if isinstance(log_path, str) else log_path
+        # Read and parse log file
         records = []
-        with open(log_path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line: continue
+        existing_hashes = set()
 
-                parts = line.split('|')
-                if len(parts) != 4: continue
-
-                records.append({
-                    'raw': line,
-                    'timestamp': parts[0],
-                    'instrument': parts[1].rstrip('+'),
-                    'bid': float(parts[2]),
-                    'ask': float(parts[3]),
-                    '_source': log_path.name
-                })
-
-        # Collection name from date in filename
+        # Get existing raw hashes to avoid duplicates
         date_part = ''.join(filter(str.isdigit, log_path.stem))[:8]
         coll_name = f"log_{date_part}" if date_part else "log"
 
-        self.db[coll_name].delete_many({'_source': log_path.name})
-        if records:
-            self.db[coll_name].insert_many(records)
+        # Get hashes of existing records for this source
+        if self.db[coll_name].count_documents({}) > 0:
+            existing_hashes = set(doc['_hash'] for doc in
+                                  self.db[coll_name].find(
+                                      {'_source': log_path.name},
+                                      {'_hash': 1, '_id': 0}
+                                  ))
 
-        return len(records)
+        # Process new records
+        new_records = []
+        with open(log_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+
+                # Create hash of raw line for duplicate checking
+                line_hash = str(hash(line))
+
+                if line_hash not in existing_hashes:
+                    parts = line.split('|')
+                    if len(parts) == 4:
+                        new_records.append({
+                            'raw': line,
+                            '_hash': line_hash,
+                            'timestamp': parts[0],
+                            'instrument': parts[1].rstrip('+'),
+                            'bid': float(parts[2]),
+                            'ask': float(parts[3]),
+                            '_source': log_path.name,
+                            'ingest_time': datetime.utcnow()
+                        })
+
+        # Insert new records in batches
+        if new_records:
+            self.db[coll_name].insert_many(new_records, ordered=False)
+
+        return len(new_records)
 
     # LOAD FUNCTIONS
     def load_csv(self, instrument: str, timeframe: str) -> pd.DataFrame:
