@@ -57,9 +57,20 @@ def load_60min_returns(data_file, pred_ts, target_horizon=60):
 # CONFIGURATION
 # ======================================================
 
+from datetime import datetime
+
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 PREDICTIONS_DIR = PROJECT_ROOT / "results" / "bnn" / "predict_v2"
+VISUALIZATIONS_BASE_DIR = PROJECT_ROOT / "results" / "visualizations"
 DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "US.100+1.parquet"
+
+# Create timestamped run directory
+run_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+INSTRUMENT = "US.100"  # Extract from DATA_FILE if needed
+TIMEFRAME = "1"        # Extract from DATA_FILE if needed
+RUN_DIR = VISUALIZATIONS_BASE_DIR / f"{INSTRUMENT}+{TIMEFRAME}" / f"run_{run_timestamp}"
+RUN_DIR.mkdir(parents=True, exist_ok=True)
+print(f"Saving visualizations to: {RUN_DIR}")
 
 # ======================================================
 # LOAD LATEST PREDICTIONS
@@ -309,8 +320,16 @@ ax2.grid(True, alpha=0.3)
 ax2.set_xlim([-4, 4])
 
 plt.tight_layout()
-plt.savefig("returns_space_visualization.png", dpi=150, bbox_inches='tight')
+plot_path = RUN_DIR / "returns_space_visualization.png"
+plt.savefig(plot_path, dpi=150, bbox_inches='tight')
+print(f"Saved plot to: {plot_path}")
 plt.show()
+
+# Save a copy of the prediction file for reference
+import shutil
+pred_copy_path = RUN_DIR / f"{pred_file.name}"
+shutil.copy2(pred_file, pred_copy_path)
+print(f"Copied prediction file to: {pred_copy_path}")
 
 # ======================================================
 # VISUALIZATION 2: PRICE TRAJECTORY RECONSTRUCTION
@@ -337,7 +356,9 @@ plt.ylabel("Price", fontsize=12)
 plt.legend(loc='upper left', fontsize=10)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig("price_trajectory_visualization.png", dpi=150, bbox_inches='tight')
+plot_path = RUN_DIR / "price_trajectory_visualization.png"
+plt.savefig(plot_path, dpi=150, bbox_inches='tight')
+print(f"Saved plot to: {plot_path}")
 plt.show()
 
 # ======================================================
@@ -413,8 +434,51 @@ axes[1, 1].legend()
 axes[1, 1].grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("model_diagnostics_summary.png", dpi=150, bbox_inches='tight')
+plot_path = RUN_DIR / "model_diagnostics_summary.png"
+plt.savefig(plot_path, dpi=150, bbox_inches='tight')
+print(f"Saved plot to: {plot_path}")
 plt.show()
+
+# Save a text file with the run summary
+with open(RUN_DIR / "run_summary.txt", "w") as f:
+    f.write(f"Run completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    f.write("\n=== PREDICTION DETAILS ===\n")
+    f.write(f"Prediction file: {pred_file.name}\n")
+    f.write(f"Instrument: {INSTRUMENT}\n")
+    f.write(f"Timeframe: {TIMEFRAME}\n")
+    f.write(f"Prediction range: {pred_ts[0]} to {pred_ts[-1]}\n")
+    f.write(f"Number of predictions: {len(pred_ts)}\n")
+    f.write(f"Time between predictions: {np.diff(pred_ts).astype('timedelta64[m]').astype(float).mean():.0f} min\n")
+    
+    f.write("\n=== DATA STATISTICS ===\n")
+    f.write(f"Raw data points in test period: {len(raw_data)}\n")
+    f.write(f"Raw log-return stats:\n")
+    f.write(f"  Min: {raw_data['log_return_raw'].min():.6f}\n")
+    f.write(f"  Max: {raw_data['log_return_raw'].max():.6f}\n")
+    f.write(f"  Mean: {raw_data['log_return_raw'].mean():.6f}\n")
+    f.write(f"  Std: {raw_data['log_return_raw'].std():.6f}\n")
+    f.write(f"  Skew: {skew(raw_data['log_return_raw'].dropna()):.2f}\n")
+    f.write(f"  Kurtosis: {kurtosis(raw_data['log_return_raw'].dropna()):.2f}\n")
+    
+    f.write("\n=== MODEL PERFORMANCE ===\n")
+    f.write(f"Bias correction (mean actual - mean predicted): {bias_correction:.6f}\n")
+    f.write(f"Calibration score: {calib_metrics['calibration_score']:.4f}\n")
+    f.write(f"Within +/-1std: {calib_metrics['within_1std']*100:.1f}% (expected {calib_metrics['expected_1std']*100:.1f}%)\n")
+    f.write(f"Within +/-2std: {calib_metrics['within_2std']*100:.1f}% (expected {calib_metrics['expected_2std']*100:.1f}%)\n")
+    f.write(f"RMSE: {np.sqrt(np.mean((pred_mean - actual_returns)**2)):.6f}\n")
+    
+    f.write("\n=== 60-MINUTE RETURNS ===\n")
+    if len(actual_60min) > 0:
+        f.write(f"Number of 60-min returns: {len(actual_60min)}\n")
+        f.write(f"Mean: {actual_60min.mean():.6f}\n")
+        f.write(f"Std: {actual_60min.std():.6f}\n")
+        f.write(f"Skew: {skew(actual_60min.dropna()):.2f}\n")
+        f.write(f"Kurtosis: {kurtosis(actual_60min.dropna()):.2f}\n")
+        f.write(f"Model vs Actual - Mean: {pred_mean[valid_mask].mean():.6f} vs {actual_60min.mean():.6f}\n")
+        f.write(f"Model vs Actual - Std: {pred_std[valid_mask].mean():.6f} vs {actual_60min.std():.6f}\n")
+
+print(f"\nAll visualizations and data saved to: {RUN_DIR}")
+print("Run summary saved to: run_summary.txt")
 
 # ======================================================
 # COMPREHENSIVE DIAGNOSTICS OUTPUT
