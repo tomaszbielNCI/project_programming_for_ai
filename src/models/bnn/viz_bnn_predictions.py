@@ -4,8 +4,54 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 import matplotlib.gridspec as gridspec
-from scipy.stats import norm
+from scipy.stats import norm, skew, kurtosis
 import seaborn as sns
+from typing import Tuple
+
+
+def load_60min_returns(data_file, pred_ts, target_horizon=60):
+    """Load actual 60-minute returns aligned with predictions."""
+    market = pd.read_parquet(data_file)
+    market["timestamp"] = pd.to_datetime(market["timestamp"])
+    market = market.set_index("timestamp").sort_index()
+
+    actual_returns = []
+    actual_prices = []
+
+    for t in pred_ts:
+        try:
+            # Find price at prediction time - use get_indexer instead of get_loc
+            idx_current = market.index.get_indexer([t], method='nearest')[0]
+            if idx_current == -1:  # No match found
+                actual_returns.append(np.nan)
+                actual_prices.append(np.nan)
+                continue
+
+            price_current = market.iloc[idx_current]['mid']
+
+            # Find price target_horizon minutes ago
+            t_prev = t - pd.Timedelta(minutes=target_horizon)
+            idx_prev = market.index.get_indexer([t_prev], method='nearest')[0]
+
+            if idx_prev == -1:
+                actual_returns.append(np.nan)
+                actual_prices.append(np.nan)
+                continue
+
+            price_prev = market.iloc[idx_prev]['mid']
+
+            # Calculate 60-minute log-return
+            log_return = np.log(price_current) - np.log(price_prev)
+
+            actual_returns.append(log_return)
+            actual_prices.append(price_current)
+
+        except Exception as e:
+            print(f"Error at {t}: {e}")
+            actual_returns.append(np.nan)
+            actual_prices.append(np.nan)
+
+    return pd.Series(actual_returns, index=pred_ts), pd.Series(actual_prices, index=pred_ts)
 
 # ======================================================
 # CONFIGURATION
@@ -31,6 +77,42 @@ pred_std = np.array(pred["std"])
 print(f"Loaded predictions: {pred_ts[0]} → {pred_ts[-1]} ({len(pred_ts)} points)")
 
 # ======================================================
+# CRITICAL DIAGNOSTICS
+# ======================================================
+
+print("\n=== CRITICAL DIAGNOSTICS ===")
+
+# 1. Check prediction time steps
+time_diffs = np.diff(pred_ts).astype('timedelta64[m]').astype(float)
+print(f"Time between predictions: {time_diffs.mean():.0f} min")
+print(f"Min time step: {time_diffs.min():.0f} min, Max time step: {time_diffs.max():.0f} min")
+
+# 2. Load and calculate 60-min returns
+print("\nLoading 60-minute returns for comparison...")
+actual_60min, prices_60min = load_60min_returns(DATA_FILE, pred_ts, 60)
+valid_mask = ~np.isnan(actual_60min)
+actual_60min = actual_60min[valid_mask]
+
+if len(actual_60min) > 0:
+    # 3. Calculate statistics
+    print(f"\n60-min returns statistics (n={len(actual_60min)}):")
+    print(f"Mean: {actual_60min.mean():.6f}")
+    print(f"Std: {actual_60min.std():.6f}")
+    print(f"Skew: {skew(actual_60min):.2f}")
+    print(f"Kurtosis: {kurtosis(actual_60min):.2f}")
+    
+    # 4. Compare with predictions
+    print("\nModel predictions vs 60-min actuals:")
+    print(f"Pred mean: {pred_mean[valid_mask].mean():.6f}, Actual mean: {actual_60min.mean():.6f}")
+    print(f"Pred std: {pred_std[valid_mask].mean():.6f}, Actual std: {actual_60min.std():.6f}")
+    
+    # Calculate and print RMSE
+    rmse = np.sqrt(np.mean((pred_mean[valid_mask] - actual_60min) ** 2))
+    print(f"RMSE: {rmse:.6f}")
+else:
+    print("\nWarning: No valid 60-minute returns could be calculated for the prediction period.")
+
+# ======================================================
 # LOAD AND PREPARE MARKET DATA
 # ======================================================
 
@@ -48,6 +130,45 @@ market = market.iloc[1:]  # Remove first row with NaN
 # Align market data with prediction timestamps
 actual_returns = market["log_return"].reindex(pred_ts, method="nearest")
 actual_prices = market["mid"].reindex(pred_ts, method="nearest")
+
+# ======================================================
+# RAW DATA VERIFICATION
+# ======================================================
+
+# Pobierz surowe dane dla okresu predykcji
+test_start = pred_ts[0]
+test_end = pred_ts[-1]
+
+# Bezpośrednie wczytanie i obliczenie
+raw_data = pd.read_parquet(DATA_FILE)
+raw_data['timestamp'] = pd.to_datetime(raw_data['timestamp'])
+raw_data = raw_data.sort_values('timestamp')
+raw_data = raw_data[(raw_data['timestamp'] >= test_start) & 
+                    (raw_data['timestamp'] <= test_end)]
+
+# Oblicz log-returns ręcznie
+raw_data['log_mid'] = np.log(raw_data['mid'])
+raw_data['log_return_raw'] = raw_data['log_mid'].diff()
+
+print("\n=== RAW DATA CHECK ===")
+print(f"Raw data points in test period: {len(raw_data)}")
+print(f"Raw log-return stats:")
+print(f"  Min: {raw_data['log_return_raw'].min():.6f}")
+print(f"  Max: {raw_data['log_return_raw'].max():.6f}")
+print(f"  Mean: {raw_data['log_return_raw'].mean():.6f}")
+print(f"  Std: {raw_data['log_return_raw'].std():.6f}")
+
+from scipy.stats import skew, kurtosis
+print(f"  Skew: {skew(raw_data['log_return_raw'].dropna()):.2f}")
+print(f"  Kurtosis: {kurtosis(raw_data['log_return_raw'].dropna()):.2f}")
+
+# Porównaj z actual_returns
+print("\n=== COMPARISON ===")
+print(f"Your actual_returns stats:")
+print(f"  Min: {actual_returns.min():.6f}")
+print(f"  Max: {actual_returns.max():.6f}")
+print(f"  Mean: {actual_returns.mean():.6f}")
+print(f"  Std: {actual_returns.std():.6f}")
 
 # ======================================================
 # POST-HOC BIAS CORRECTION (FOR VISUALIZATION PURPOSES)
