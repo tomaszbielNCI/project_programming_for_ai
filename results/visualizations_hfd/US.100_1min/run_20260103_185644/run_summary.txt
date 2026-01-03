@@ -1,0 +1,33 @@
+Run completed at: 2026-01-03 18:57:41
+
+=== PREDICTION DETAILS ===
+Prediction file: hfd_minimal_predictions_20260103_185634.pkl
+Instrument: US.100
+Timeframe: 1min
+Prediction range: 2025-12-18 09:47:00 to 2025-12-19 06:47:00
+Number of predictions: 1037
+Time between predictions: 1 min
+
+=== MODEL PERFORMANCE ===
+RMSE: 0.351417
+Mean Actual Return: 0.00053544
+Mean Predicted Return: 0.21101435
+Actual Returns Std: 0.00240415
+Mean Predicted Std: 0.51164973
+Mean Laplace Scale: 0.36179098
+
+=== LAPLACE CALIBRATION ===
+Calibration score: 0.9435
+Within ±1 scale: 58.0% (expected 63.2%)
+Within ±2 scale: 80.4% (expected 86.5%)
+
+=== DATA CHARACTERISTICS ===
+Skewness of actual returns: 0.66
+Excess kurtosis: 1.82
+
+=== PRICE TRAJECTORY ===
+Initial price: 25085.23
+Final actual price: 25273.03
+Final predicted median: 2147873753043544234365238698211814163154456379648667358783483926235863569932137450658223280525148160.00
+Final relative error: -8498679472939669408860852719813827880149087223207252727114177436308014085723843339393314649538560.00%
+90% CI width at end: 1209059308974543.0% of median

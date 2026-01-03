@@ -220,7 +220,7 @@ price_samples = np.zeros((n_samples, len(pred_ts)))
 
 for i in range(n_samples):
     # Sample returns from Normal distribution (model outputs Normal)
-    sampled_returns = np.random.normal(loc=corrected_mean, scale=pred_std)
+    sampled_returns = np.random.laplace(loc=corrected_mean, scale=pred_std / np.sqrt(2))
     sampled_log_price = np.log(initial_price) + np.cumsum(sampled_returns)
     price_samples[i] = np.exp(sampled_log_price)
 

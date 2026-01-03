@@ -1,0 +1,35 @@
+Run completed at: 2026-01-03 18:02:42
+
+=== PREDICTION DETAILS ===
+Prediction file: rolling_predictions_20260103_030558.pkl
+Instrument: US.100
+Timeframe: 1
+Prediction range: 2025-12-08 03:10:00 to 2026-01-02 22:05:00
+Number of predictions: 382
+Time between predictions: 97 min
+
+=== DATA STATISTICS ===
+Raw data points in test period: 13490
+Raw log-return stats:
+  Min: -0.004732
+  Max: 0.010646
+  Mean: -0.000001
+  Std: 0.000306
+  Skew: 2.85
+  Kurtosis: 120.48
+
+=== MODEL PERFORMANCE ===
+Bias correction (mean actual - mean predicted): -0.001633
+Calibration score: 0.9050
+Within +/-1std: 83.2% (expected 68.3%)
+Within +/-2std: 99.5% (expected 95.4%)
+RMSE: 0.001893
+
+=== 60-MINUTE RETURNS ===
+Number of 60-min returns: 382
+Mean: -0.000004
+Std: 0.001866
+Skew: -0.66
+Kurtosis: 12.93
+Model vs Actual - Mean: 0.001951 vs -0.000004
+Model vs Actual - Std: 0.002601 vs 0.001866
