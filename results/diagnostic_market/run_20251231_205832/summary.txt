@@ -1,0 +1,37 @@
+
+RUN ID: 20251231_205832
+Instrument: US.100, Timeframe: 1m
+Observations (valid returns only): 64948
+Excluded returns due to gaps: 51
+1) Visualization completed → sanity of data confirmed visually.
+
+2) Basic statistics
+Mean: -2.232650e-07
+Std: 3.222357e-04
+Skewness: 0.174
+Excess Kurtosis: 15.965
+
+3) ACF computed
+Interpretation:
+- Significant short-lag ACF → microstructure effects
+- Decay speed informs window length for models
+
+4) Jarque–Bera Test
+JB statistic: 690069.44, p-value: 0.00e+00
+Result: Strong rejection of normality → heavy tails confirmed
+
+5) ARCH Test
+ARCH stat: 7103.38, p-value: 0.00e+00
+Result: Strong volatility clustering detected
+
+6) Hurst Exponent
+H = 0.508
+Interpretation: Near-random walk
+
+7) Distribution fitting
+Normal: mu=-2.233e-07, sigma=3.222e-04
+Student-t: df=1.99, loc=1.977e-06, scale=1.538e-04
+
+Diagnostics complete.
+Report saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20251231_205832\US.100_1m_report.csv
+Summary saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20251231_205832\summary.txt

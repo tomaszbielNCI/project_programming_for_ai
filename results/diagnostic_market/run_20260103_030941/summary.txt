@@ -1,0 +1,37 @@
+
+RUN ID: 20260103_030941
+Instrument: OIL.WTI, Timeframe: 1m
+Observations (valid returns only): 68345
+Excluded returns due to gaps: 2250
+1) Visualization completed → sanity of data confirmed visually.
+
+2) Basic statistics
+Mean: -7.413599e-07
+Std: 5.163644e-04
+Skewness: -0.242
+Excess Kurtosis: 7.309
+
+3) ACF computed
+Interpretation:
+- Significant short-lag ACF → microstructure effects
+- Decay speed informs window length for models
+
+4) Jarque–Bera Test
+JB statistic: 152777.00, p-value: 0.00e+00
+Result: Strong rejection of normality → heavy tails confirmed
+
+5) ARCH Test
+ARCH stat: 3935.71, p-value: 0.00e+00
+Result: Strong volatility clustering detected
+
+6) Hurst Exponent
+H = 0.486
+Interpretation: Near-random walk
+
+7) Distribution fitting
+Normal: mu=-7.414e-07, sigma=5.164e-04
+Student-t: df=1.99, loc=-9.850e-07, scale=3.318e-04
+
+Diagnostics complete.
+Report saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20260103_030941\OIL.WTI_1m_report.csv
+Summary saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20260103_030941\summary.txt

@@ -1,0 +1,37 @@
+
+RUN ID: 20260103_031013
+Instrument: USDJPY, Timeframe: 1m
+Observations (valid returns only): 70838
+Excluded returns due to gaps: 265
+1) Visualization completed → sanity of data confirmed visually.
+
+2) Basic statistics
+Mean: 5.519391e-07
+Std: 1.180947e-04
+Skewness: 0.153
+Excess Kurtosis: 29.515
+
+3) ACF computed
+Interpretation:
+- Significant short-lag ACF → microstructure effects
+- Decay speed informs window length for models
+
+4) Jarque–Bera Test
+JB statistic: 2571594.21, p-value: 0.00e+00
+Result: Strong rejection of normality → heavy tails confirmed
+
+5) ARCH Test
+ARCH stat: 2119.55, p-value: 0.00e+00
+Result: Strong volatility clustering detected
+
+6) Hurst Exponent
+H = 0.514
+Interpretation: Near-random walk
+
+7) Distribution fitting
+Normal: mu=5.519e-07, sigma=1.181e-04
+Student-t: df=1.99, loc=1.334e-06, scale=6.599e-05
+
+Diagnostics complete.
+Report saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20260103_031013\USDJPY_1m_report.csv
+Summary saved to: C:\python\project_programming_for_ai\results\diagnostic_market\run_20260103_031013\summary.txt

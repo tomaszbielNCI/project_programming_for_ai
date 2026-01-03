@@ -2,17 +2,7 @@
 archive/
 temp_data/
 results/bnn/train_*/
-results/diagnostic_market/run_*/
-*.csv
-*.pkl
-*.h5
-*.pt
-*.pth
-*.log
-*.png
-*.jpg
-*.jpeg
-*.gif
+
 .ipynb_checkpoints/
 *.ipynb
 

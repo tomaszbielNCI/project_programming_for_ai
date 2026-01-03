@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/move_rf_results.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_acf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_distfit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_price.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_report.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_returns.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/summary.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/visualizations_hfd/US.100_1min/run_20260103_190733/run_summary.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/loaders/bnn_basic_loader_0.1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_hfd.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_hfd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ensemble_forecaster.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/feature_importance/shap_analyzer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/forecasting/lstm_trading.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/regime_detection/midas_detector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ipython_commands_parser_arrow.py" beforeDir="false" />
-    </list>
+    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
