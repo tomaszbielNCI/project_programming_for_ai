@@ -414,6 +414,21 @@ with open(RUN_DIR / "run_summary.txt", "w") as f:
     f.write(f"Skewness of actual returns: {skew(actual_returns):.2f}\n")
     f.write(f"Excess kurtosis: {kurtosis(actual_returns):.2f}\n")
 
+    # Calculate price trajectories from predicted returns
+    # For the median (50th percentile), we'll use the predicted means directly
+    cumulative_pred_returns = np.cumsum(pred_mean)
+    price_50th = initial_price * (1 + cumulative_pred_returns)
+    
+    # For the 5th and 95th percentiles, we'll use the predicted standard deviations
+    # to estimate the confidence intervals
+    cumulative_std = np.sqrt(np.cumsum(pred_std**2))  # Assuming independence
+    
+    # For Laplace distribution, the 5th and 95th percentiles are at mean ± 1.44 * scale
+    # where scale = std / sqrt(2)
+    laplace_scale = cumulative_std / np.sqrt(2)
+    price_5th = initial_price * (1 + cumulative_pred_returns - 1.44 * laplace_scale)
+    price_95th = initial_price * (1 + cumulative_pred_returns + 1.44 * laplace_scale)
+    
     f.write("\n=== PRICE TRAJECTORY ===\n")
     final_price_error = (actual_price_trajectory[-1] - price_50th[-1]) / actual_price_trajectory[-1]
     f.write(f"Initial price: {initial_price:.2f}\n")
@@ -432,3 +447,158 @@ print("Run summary saved to: run_summary.txt")
 print("\n" + "=" * 60)
 print("HFD BNN VISUALIZATION COMPLETE")
 print("=" * 60)
+
+
+# ======================================================
+# MONGODB ATLAS SAVE - UNCOMMENT TO SAVE VISUALIZATION METADATA
+# ======================================================
+
+def save_viz_metadata_to_mongo():
+    """
+    Save visualization metadata to MongoDB Atlas for academic requirements.
+    Saves only metadata, not the actual visualizations or large data.
+    """
+    try:
+        from src.loaders.data_IO_v2 import DataIOv2
+
+        print("\n" + "=" * 60)
+        print("SAVING TO MONGODB ATLAS FOR ACADEMIC REQUIREMENTS")
+        print("=" * 60)
+
+        io = DataIOv2()
+
+        # Create metadata document
+        metadata = {
+            'timestamp': datetime.now(),
+            'experiment_type': 'HFD_BNN_Visualization',
+            'instrument': INSTRUMENT,
+            'timeframe': TIMEFRAME,
+            'prediction_count': len(pred_ts),
+            'date_range': {
+                'start': pred_ts[0].strftime('%Y-%m-%d %H:%M:%S'),
+                'end': pred_ts[-1].strftime('%Y-%m-%d %H:%M:%S')
+            },
+            'model_performance': {
+                'rmse': float(pred.get('rmse', 0)),
+                'calibration_score': float(calib_metrics['calibration_score']),
+                'within_1scale_actual': float(calib_metrics['within_1scale']),
+                'within_1scale_expected': float(calib_metrics['expected_1scale']),
+                'within_2scale_actual': float(calib_metrics['within_2scale']),
+                'within_2scale_expected': float(calib_metrics['expected_2scale']),
+                'mean_actual_return': float(actual_returns.mean()),
+                'mean_predicted_return': float(pred_mean.mean()),
+                'laplace_scale': float(calib_metrics['sharpness'])
+            },
+            'visualization_files': [
+                'returns_space_visualization.png',
+                'price_prediction_60min_horizon.png',
+                'model_diagnostics_summary.png',
+                'run_summary.txt',
+                pred_file.name
+            ],
+            'local_storage_path': str(RUN_DIR),
+            'data_source': 'MT4_HFD_Live_Logs',
+            'processing_pipeline': 'HFD → 1-min aggregation → BNN → Visualization',
+            'academic_requirement': True,
+            'notes': 'HFD BNN model with tick_count feature. Shows good calibration but scaling issues.'
+        }
+
+        # Save to MongoDB
+        collection_name = "financial_data"
+        result = io.db[collection_name].insert_one(metadata)
+
+        print(f"✓ Successfully saved visualization metadata to MongoDB Atlas")
+        print(f"  Database: {io.db.name}")
+        print(f"  Collection: {collection_name}")
+        print(f"  Document ID: {result.inserted_id}")
+        print(f"  Files referenced: {len(metadata['visualization_files'])}")
+
+        # Also save a reference in a main collection for easy access
+        io.db['project_visualizations'].insert_one({
+            'run_id': run_timestamp,
+            'instrument': INSTRUMENT,
+            'collection': collection_name,
+            'timestamp': datetime.now()
+        })
+
+        io.close()
+
+        print(f"\n✓ MongoDB save complete.")
+        print(f"  Note: Only metadata saved. Full results in: {RUN_DIR}")
+        return True
+
+    except ImportError as e:
+        print(f"\n⚠ Cannot import DataIOv2: {e}")
+        print("  Make sure data_IO_v2.py is in your Python path")
+        return False
+    except Exception as e:
+        print(f"\n⚠ MongoDB save failed: {e}")
+        print("  This does not affect your project evaluation.")
+        print("  Parquet files and local visualizations are the primary results.")
+        return False
+
+
+# ======================================================
+# UNCOMMENT THE NEXT LINE TO SAVE TO MONGODB
+# ======================================================
+
+#save_viz_metadata_to_mongo()
+
+# ======================================================
+# ALTERNATIVE: MINIMAL ONE-LINE SAVE (if above to falis due too large)
+# ======================================================
+def save_minimal_to_mongo():
+    """Minimal MongoDB save - just proof of concept"""
+    try:
+        from pymongo import MongoClient
+        from dotenv import load_dotenv
+        import os
+        from datetime import datetime
+
+        load_dotenv()
+
+        # Get connection details
+        uri = os.getenv("MONGO_ATLAS_URI")
+        db_name = "financial_data"  # Directly set the database name
+
+        if not uri:
+            print("❌ MONGO_ATLAS_URI not found in .env file")
+            return False
+
+        # Connect to MongoDB
+        client = MongoClient(uri, serverSelectionTimeoutMS=5000)
+        db = client[db_name]
+
+        # Test connection
+        client.admin.command('ping')
+        print("✅ Connected to MongoDB Atlas")
+
+        # Prepare document
+        doc = {
+            'timestamp': datetime.now(),
+            'project': 'Programming for AI - HFD BNN',
+            'student_id': 'x25113186',
+            'instrument': INSTRUMENT,
+            'run_directory': str(RUN_DIR),
+            'submission_date': '2026-01-03',
+            'academic_compliance': True
+        }
+
+        # Insert document
+        collection = db['financial_data']  # Using the collection name you specified
+        result = collection.insert_one(doc)
+
+        print(f"✅ Successfully saved to MongoDB:")
+        print(f"  Database: {db_name}")
+        print(f"  Collection: financial_data")
+        print(f"  Document ID: {result.inserted_id}")
+        return True
+
+    except Exception as e:
+        print(f"❌ MongoDB save failed: {str(e)}")
+        print("  This is optional - local files are the primary submission")
+        return False
+
+# UNCOMMENT ONE OF THESE:
+# save_viz_metadata_to_mongo()  # For detailed metadata
+save_minimal_to_mongo()       # For minimal proof-of-concept

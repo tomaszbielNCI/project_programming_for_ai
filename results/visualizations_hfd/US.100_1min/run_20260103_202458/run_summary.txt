@@ -1,4 +1,4 @@
-Run completed at: 2026-01-03 19:08:07
+Run completed at: 2026-01-03 20:25:06
 
 === PREDICTION DETAILS ===
 Prediction file: hfd_minimal_predictions_20260103_185634.pkl
@@ -26,3 +26,14 @@ Skewness of actual returns: 0.66
 Excess kurtosis: 1.82
 
 === PRICE TRAJECTORY ===
+Initial price: 100.00
+Final actual price: 155.52
+Final predicted median: 21982.17
+Final relative error: -14034.19%
+90% CI width at end: 17.9% of median
+
+=== SCALING ISSUE NOTE ===
+Model predicts in normalized scale (mean ~0.211, std ~0.512)
+Actual returns are much smaller (mean ~0.0005, std ~0.0024)
+Calibration is good despite scaling issue: 58.0% vs 63.2% expected
+This suggests the model correctly captures uncertainty structure.

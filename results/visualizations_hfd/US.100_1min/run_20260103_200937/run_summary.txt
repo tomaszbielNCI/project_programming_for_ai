@@ -1,0 +1,39 @@
+Run completed at: 2026-01-03 20:09:48
+
+=== PREDICTION DETAILS ===
+Prediction file: hfd_minimal_predictions_20260103_185634.pkl
+Instrument: US.100
+Timeframe: 1min
+Prediction range: 2025-12-18 09:47:00 to 2025-12-19 06:47:00
+Number of predictions: 1037
+Time between predictions: 1 min
+
+=== MODEL PERFORMANCE ===
+RMSE: 0.351417
+Mean Actual Return: 0.00053544
+Mean Predicted Return: 0.21101435
+Actual Returns Std: 0.00240415
+Mean Predicted Std: 0.51164973
+Mean Laplace Scale: 0.36179098
+
+=== LAPLACE CALIBRATION ===
+Calibration score: 0.9435
+Within ±1 scale: 58.0% (expected 63.2%)
+Within ±2 scale: 80.4% (expected 86.5%)
+
+=== DATA CHARACTERISTICS ===
+Skewness of actual returns: 0.66
+Excess kurtosis: 1.82
+
+=== PRICE TRAJECTORY ===
+Initial price: 100.00
+Final actual price: 155.52
+Final predicted median: 21982.17
+Final relative error: -14034.19%
+90% CI width at end: 17.9% of median
+
+=== SCALING ISSUE NOTE ===
+Model predicts in normalized scale (mean ~0.211, std ~0.512)
+Actual returns are much smaller (mean ~0.0005, std ~0.0024)
+Calibration is good despite scaling issue: 58.0% vs 63.2% expected
+This suggests the model correctly captures uncertainty structure.

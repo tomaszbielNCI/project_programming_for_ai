@@ -1,0 +1,33 @@
+# requirements.txt
+# Core dependencies
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.4.0
+seaborn>=0.11.0  # Added for sns import
+scikit-learn>=1.0.0  # For RandomForest, metrics, etc.
+scipy>=1.7.0
+tqdm>=4.62.0
+
+# Machine Learning
+tensorflow>=2.16.0  # Updated for Keras 3 compatibility
+keras>=3.0.0
+tensorflow-probability>=0.24.0  # Updated for TF 2.16+ compatibility
+neuralprophet>=1.0.0
+joblib>=1.0.0  # For model persistence
+
+# Data Processing
+pyarrow>=6.0.0  # For parquet files
+pymongo>=4.0.0
+python-dotenv>=0.19.0
+pytz>=2021.3
+
+# Time Series Analysis
+statsmodels>=0.13.0
+arch>=5.0.0
+h5py>=3.0.0  # For HDF5 model saving
+
+# Development
+jupyter>=1.0.0
+ipykernel>=6.0.0
+black>=21.0
+pylint>=2.10.0

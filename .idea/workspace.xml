@@ -5,14 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ingesting/fast_hfd_aggregator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/loaders/fast_hfd_loader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_hfd.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/bnn/train_bnn_hfd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_minimal.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_hfd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/move_rf_results.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_acf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_distfit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_price.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_report.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/US.100_HFD_returns.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/diagnostic_market/run_20251218_210418/summary.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/visualizations_hfd/US.100_1min/run_20260103_190733/run_summary.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loaders/bnn_basic_loader_0.1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_hfd.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions_hfd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ensemble_forecaster.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/feature_importance/shap_analyzer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/forecasting/lstm_trading.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/regime_detection/midas_detector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ipython_commands_parser_arrow.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +120,7 @@
     "Python.preprocessing.executor": "Run",
     "Python.próba.executor": "Run",
     "Python.próba2.executor": "Run",
+    "Python.python src/models/bnn/train_bnn_hfd.py.executor": "Run",
     "Python.regression_analysis.executor": "Run",
     "Python.rf_example (1).executor": "Run",
     "Python.rf_example.executor": "Run",
@@ -145,36 +155,14 @@
       <recent name="C:\python\project_programming_for_ai\temp_data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\python\project_programming_for_ai\src\models" />
       <recent name="C:\python\project_programming_for_ai\src\loaders" />
       <recent name="C:\python\project_programming_for_ai\data\parsed\tymczasowe " />
       <recent name="C:\python\project_programming_for_ai\data\historical\US.100" />
       <recent name="C:\python\project_programming_for_ai\src\ingesting" />
-      <recent name="C:\python\project_programming_for_ai\src\diagnostic" />
     </key>
   </component>
   <component name="RunManager" selected="Python.viz_bnn_predictions_hfd">
-    <configuration name="fast_hfd_aggregator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="project_programming_for_ai" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ingesting" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ingesting/fast_hfd_aggregator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="predict_rolling_bnn_hfd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
@@ -189,6 +177,28 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_hfd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="python src/models/bnn/train_bnn_hfd.py" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="project_programming_for_ai" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="src/models/bnn/train_bnn_hfd.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -266,10 +276,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.viz_bnn_predictions_hfd" />
+        <item itemvalue="Python.python src/models/bnn/train_bnn_hfd.py" />
         <item itemvalue="Python.predict_rolling_bnn_hfd" />
         <item itemvalue="Python.viz_bnn_predictions" />
         <item itemvalue="Python.train_bnn_hfd" />
-        <item itemvalue="Python.fast_hfd_aggregator" />
       </list>
     </recent_temporary>
   </component>
