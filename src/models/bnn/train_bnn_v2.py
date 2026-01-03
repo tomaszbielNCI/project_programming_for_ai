@@ -22,11 +22,12 @@ EPOCHS = 10                   # easy to increase later
 
 # --- time-based split ---
 TRAIN_DAYS = 32
-TEST_DAYS = 8                 # used later for walk-forward
+TEST_DAYS = 8             # used later for walk-forward
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "US.100+1.parquet"
-
+#DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "OIL.WTI+1.parquet"
+#DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "USDJPY+1.parquet"
 INTRADAY = True               # minutes data
 
 # --- time-based split ---
@@ -38,7 +39,7 @@ TRAIN_END_TIMESTAMP = "2025-12-05 21:59:00"  # the last timestamp of training pe
 # ======================================================
 
 X, y, timestamps = load_parquet_for_bnn(
-    DATA_FILE,
+    str(DATA_FILE),
     window=WINDOW,
     target_horizon=TARGET_HORIZON,
     intraday=INTRADAY,

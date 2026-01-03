@@ -4,7 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="" />
+    <list default="true" id="f2f72700-bc04-4b6b-8158-3da75931f5ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/ingesting/parser_arrow_0.1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+15.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+15.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+5.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+60.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI/OIL.WTI+60.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+15.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+15.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+5.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+60.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY/USDJPY+60.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/DE.30+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/DE.30+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/EURUSD+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/EURUSD+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/OIL.WTI+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/OIL.WTI+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/OILs+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/OILs+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/US.100+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/US.100+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/US.30+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/US.30+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/US.500+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/US.500+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/USDJPY+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/USDJPY+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/VIX+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/VIX+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/W.20+.parquet" beforeDir="false" afterPath="$PROJECT_DIR$/data/parsed/W.20+.parquet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/diagnostic_market/run_20251218_135614/US.100_HFD_acf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/diagnostic_market/run_20251218_135614/US.100_HFD_distfit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/diagnostic_market/run_20251218_135614/US.100_HFD_price.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/diagnostic_market/run_20251218_135614/US.100_HFD_report.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/parsed/diagnostic_market/run_20251218_135614/US.100_HFD_returns.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ingesting/parser_arrow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ingesting/parser_arrow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ingesting/parser_historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ingesting/parser_historical.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ingesting/parser_historical_0.1.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/ingesting/parser_historical_0.1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loaders/data_IO_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders/data_IO_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/predict_rolling_bnn_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/train_bnn_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/bnn/viz_bnn_predictions.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,15 +164,15 @@
       <recent name="C:\python\project_programming_for_ai\temp_data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\python\project_programming_for_ai\data\parsed\tymczasowe " />
       <recent name="C:\python\project_programming_for_ai\data\historical\US.100" />
       <recent name="C:\python\project_programming_for_ai\src\ingesting" />
       <recent name="C:\python\project_programming_for_ai\src\diagnostic" />
       <recent name="C:\python\project_programming_for_ai\src\cleaning" />
-      <recent name="C:\python\project_programming_for_ai\src\models" />
     </key>
   </component>
   <component name="RunManager" selected="Python.viz_bnn_predictions">
-    <configuration name="data_IO_v2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="parser_arrow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project_programming_for_ai" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,11 +181,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/loaders" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/ingesting" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/loaders/data_IO_v2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/ingesting/parser_arrow.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -252,10 +285,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.viz_bnn_predictions" />
-        <item itemvalue="Python.parser_historical" />
-        <item itemvalue="Python.data_IO_v2" />
         <item itemvalue="Python.predict_rolling_bnn_v2" />
         <item itemvalue="Python.train_bnn_v2" />
+        <item itemvalue="Python.parser_historical" />
+        <item itemvalue="Python.parser_arrow" />
       </list>
     </recent_temporary>
   </component>

@@ -63,11 +63,22 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 PREDICTIONS_DIR = PROJECT_ROOT / "results" / "bnn" / "predict_v2"
 VISUALIZATIONS_BASE_DIR = PROJECT_ROOT / "results" / "visualizations"
 DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "US.100+1.parquet"
+def extract_instrument_timeframe(filepath):
+    """Extract instrument and timeframe from filepath like '.../US.100+1.parquet'"""
+    filename = Path(filepath).stem  # Gets 'US.100+1' from full path
+    if '+' in filename:
+        instrument, timeframe = filename.split('+', 1)  # Split on first '+' only
+    else:
+        # Fallback if filename doesn't contain '+'
+        instrument = filename
+        timeframe = "1"  # Default timeframe
+    return instrument, timeframe
+
+# Extract instrument and timeframe from the data file
+INSTRUMENT, TIMEFRAME = extract_instrument_timeframe(DATA_FILE)
 
 # Create timestamped run directory
 run_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-INSTRUMENT = "US.100"  # Extract from DATA_FILE if needed
-TIMEFRAME = "1"        # Extract from DATA_FILE if needed
 RUN_DIR = VISUALIZATIONS_BASE_DIR / f"{INSTRUMENT}+{TIMEFRAME}" / f"run_{run_timestamp}"
 RUN_DIR.mkdir(parents=True, exist_ok=True)
 print(f"Saving visualizations to: {RUN_DIR}")

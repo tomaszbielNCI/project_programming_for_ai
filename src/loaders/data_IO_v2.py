@@ -73,7 +73,8 @@ class DataIOv2:
         existing_hashes = set()
 
         # Get existing raw hashes to avoid duplicates
-        date_part = ''.join(filter(str.isdigit, log_path.stem))[:8]
+        digits = ''.join(filter(lambda x: x.isdigit(), str(log_path.stem)))
+        date_part = digits[:8]
         coll_name = f"log_{date_part}" if date_part else "log"
 
         # Get hashes of existing records for this source

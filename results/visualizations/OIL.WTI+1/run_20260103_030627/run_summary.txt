@@ -1,0 +1,35 @@
+Run completed at: 2026-01-03 03:07:12
+
+=== PREDICTION DETAILS ===
+Prediction file: rolling_predictions_20260103_030558.pkl
+Instrument: OIL.WTI
+Timeframe: 1
+Prediction range: 2025-12-08 03:10:00 to 2026-01-02 22:05:00
+Number of predictions: 382
+Time between predictions: 97 min
+
+=== DATA STATISTICS ===
+Raw data points in test period: 22856
+Raw log-return stats:
+  Min: -0.003943
+  Max: 0.006433
+  Mean: -0.000002
+  Std: 0.000464
+  Skew: 0.14
+  Kurtosis: 5.86
+
+=== MODEL PERFORMANCE ===
+Bias correction (mean actual - mean predicted): -0.001944
+Calibration score: 0.9390
+Within +/-1std: 76.4% (expected 68.3%)
+Within +/-2std: 99.5% (expected 95.4%)
+RMSE: 0.002112
+
+=== 60-MINUTE RETURNS ===
+Number of 60-min returns: 382
+Mean: -0.000126
+Std: 0.002780
+Skew: -0.28
+Kurtosis: 2.06
+Model vs Actual - Mean: 0.001951 vs -0.000126
+Model vs Actual - Std: 0.002601 vs 0.002780

@@ -20,6 +20,8 @@ from src.loaders.bnn_basic_loader import load_parquet_for_bnn
 WINDOW = 120
 TARGET_HORIZON = 60
 DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "US.100+1.parquet"
+#DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "USDJPY+1.parquet"
+#DATA_FILE = PROJECT_ROOT / "data" / "parsed" / "OIL.WTI+1.parquet"
 INTRADAY = True
 BATCH_SIZE = 128
 
@@ -60,7 +62,7 @@ print(f"Train end timestamp: {train_end}")
 # ----------------------------
 print("Loading full dataset…")
 X, y, timestamps = load_parquet_for_bnn(
-    DATA_FILE,
+    str(DATA_FILE),
     window=WINDOW,
     target_horizon=TARGET_HORIZON,
     intraday=INTRADAY,

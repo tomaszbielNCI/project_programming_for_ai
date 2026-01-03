@@ -53,9 +53,10 @@ RESULTS_DIR = PROJECT_ROOT / "results" / "diagnostic_market"
 SYMBOL = "US.100"
 TIMEFRAME = "1m"
 
-# SYMBOL = "NASDAQ"
-# TIMEFRAME = "15m"
-
+#SYMBOL = "OIL.WTI"
+#TIMEFRAME = "1m"
+#SYMBOL = "USDJPY"
+#TIMEFRAME = "1m"
 if TIMEFRAME == "HFD":
     FILE_NAME = f"{SYMBOL}+.parquet"
 else:

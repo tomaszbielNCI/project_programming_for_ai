@@ -50,7 +50,7 @@ def parse_historical_csv(file_path: Path, instrument_name: str, source="historic
 def process_historical_dir(historical_dir: Path, parquet_dir: Path):
     """
     Processes all CSVs in historical_dir and saves them as Parquet files
-    with append mode similar to parser_arrow.py
+    with append mode similar to parser_arrow_0.1.py
     """
     csv_files = list(historical_dir.glob("*.csv"))
     if not csv_files:
@@ -69,7 +69,7 @@ def process_historical_dir(historical_dir: Path, parquet_dir: Path):
 
         # Create output filename based on input filename
         output_file = parquet_dir / f"{csv_file.stem}.parquet"
-        
+
         # If output file exists, load it and append new data
         if output_file.exists():
             try:
@@ -79,11 +79,11 @@ def process_historical_dir(historical_dir: Path, parquet_dir: Path):
             except Exception as e:
                 print(f"Error reading existing {output_file.name}: {e}")
                 continue
-        
+
         # Sort and remove duplicates (keep last occurrence)
         df = df.sort_values("timestamp")
         df = df.drop_duplicates(subset=["timestamp", "instrument"], keep="last")
-        
+
         # Save the combined data
         df.to_parquet(output_file, engine="pyarrow", index=False)
         print(f"Saved {len(df)} records to {output_file.name} (appended: {output_file.exists()})")

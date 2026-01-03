@@ -7,10 +7,10 @@ import pandas as pd
 from pathlib import Path
 
 # --- Configuration ---
-USE_MONGO = True  # Set to True to load from MongoDB instead of files
+USE_MONGO = False  # Set to True to load from MongoDB instead of files
 
 # File system paths (used when USE_MONGO = False)
-HISTORICAL_DIR = Path(r"C:\python\project_programming_for_ai\data\historical\US.100").resolve()
+HISTORICAL_DIR = Path(r"C:\python\project_programming_for_ai\data\historical\OIL.WTI").resolve()
 PARQUET_DIR = Path(r"C:\python\project_programming_for_ai\data\parsed").resolve()
 PARQUET_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -129,7 +129,7 @@ def parse_historical_csv_from_dataframe(df: pd.DataFrame, instrument_name: str, 
 def process_historical_dir(historical_dir: Path, parquet_dir: Path):
     """
     Processes all CSVs in historical_dir and saves them as Parquet files
-    with append mode similar to parser_arrow.py
+    with append mode similar to parser_arrow_0.1.py
     """
     csv_files = list(historical_dir.glob("*.csv"))
     if not csv_files:
@@ -176,8 +176,8 @@ def process_mongo_dir(parquet_dir: Path, instruments: list = None):
     """
     if instruments is None:
         instruments = [("US.100", "1"), ("US.100", "5"), ("US.100", "15"), ("US.100", "60")
-                       # ("OIL.WTI", "1"), ("OIL.WTI", "5"), ("OIL.WTI", "15"), ("OIL.WTI", "60"),
-                       # ("USDJPY", "1"), ("USDJPY", "5"), ("USDJPY", "15"), ("USDJPY", "60")
+                        #("OIL.WTI", "1"), ("OIL.WTI", "5"), ("OIL.WTI", "15"), ("OIL.WTI", "60"),
+                        #("USDJPY", "1"), ("USDJPY", "5"), ("USDJPY", "15"), ("USDJPY", "60")
                        ]
 
     parquet_dir.mkdir(parents=True, exist_ok=True)

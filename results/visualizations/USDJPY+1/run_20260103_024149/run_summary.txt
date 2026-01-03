@@ -1,0 +1,35 @@
+Run completed at: 2026-01-03 02:41:59
+
+=== PREDICTION DETAILS ===
+Prediction file: rolling_predictions_20260103_023651.pkl
+Instrument: USDJPY
+Timeframe: 1
+Prediction range: 2025-12-08 02:04:00 to 2026-01-02 22:14:00
+Number of predictions: 418
+Time between predictions: 89 min
+
+=== DATA STATISTICS ===
+Raw data points in test period: 25006
+Raw log-return stats:
+  Min: -0.001612
+  Max: 0.001943
+  Mean: 0.000000
+  Std: 0.000114
+  Skew: 0.07
+  Kurtosis: 18.08
+
+=== MODEL PERFORMANCE ===
+Bias correction (mean actual - mean predicted): 0.001642
+Calibration score: 0.9298
+Within +/-1std: 77.8% (expected 68.3%)
+Within +/-2std: 100.0% (expected 95.4%)
+RMSE: 0.001649
+
+=== 60-MINUTE RETURNS ===
+Number of 60-min returns: 418
+Mean: 0.000030
+Std: 0.000791
+Skew: -0.03
+Kurtosis: 1.95
+Model vs Actual - Mean: -0.001640 vs 0.000030
+Model vs Actual - Std: 0.001739 vs 0.000791

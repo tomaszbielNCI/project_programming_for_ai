@@ -1,42 +1,6 @@
 """
 MT4 HFD Data Parser with Parquet Output
-
-PLANNED OPTIMIZATIONS:
-
-1. INCREMENTAL INGESTION:
-   # Track last processed position in each file
-   # Use file modification time + inode to detect changes
-   # Store watermarks for each data source
-   # Example: {'file1.log': {'last_pos': 12345, 'last_modified': 1671234567}}
-
-2. PERFORMANCE IMPROVEMENTS:
-   # Replace pandas with Polars for faster processing
-   # Use Apache Arrow streaming for memory efficiency
-   # Implement chunked processing for large files
-   # Add parallel processing for multiple instruments
-
-3. LIVE DATA PROCESSING:
-   # Add in-memory ring buffer for real-time inference
-   # Implement async I/O for non-blocking operations
-   # Add backpressure handling
-   
-4. DISTRIBUTED PROCESSING (Optional):
-   # Kafka integration for event streaming
-   # Redis for shared state and caching
-   # Example: 
-   #   - Kafka topics per instrument
-   #   - Redis for watermark tracking
-   #   - Distributed processing with Dask/Ray
-
-5. ERROR HANDLING:
-   # Dead letter queue for failed records
-   # Automatic retry with exponential backoff
-   # Circuit breaker pattern for external services
-
-Current Implementation:
-- Basic file parsing with pandas
-- Simple append mode with deduplication
-- No incremental processing
+Now with MongoDB source option for academic requirements.
 """
 
 import os
@@ -45,16 +9,17 @@ import pandas as pd
 from datetime import datetime
 from typing import Dict, Optional, List, Tuple
 
-# TODO: Add these imports when implementing optimizations
-# import polars as pl
-# from kafka import KafkaProducer
-# import redis
-# import asyncio
-
 # --- Configuration ---
+USE_MONGO = False # Set to True to load from MongoDB instead of files
+
+# File system paths (used when USE_MONGO = False)
 RAW_DIR = Path(r"C:\python\project_programming_for_ai\data\hfd")
 PARQUET_DIR = Path(r"C:\python\project_programming_for_ai\data\parsed")
 PARQUET_DIR.mkdir(parents=True, exist_ok=True)
+
+# MongoDB settings (used when USE_MONGO = True)
+MONGO_DATES = ["42025121"]  # Dates to load from MongoDB
+
 
 def parse_raw_line(line, source="live"):
     """
@@ -80,6 +45,40 @@ def parse_raw_line(line, source="live"):
     except Exception:
         return None
 
+
+def load_logs_from_mongo(dates: List[str]) -> List[Dict]:
+    """Load HFD log data from MongoDB for specified dates."""
+    try:
+        from src.loaders.data_IO_v2 import DataIOv2
+        io = DataIOv2()
+        all_records = []
+
+        for date in dates:
+            df = io.load_logs(date)
+            if df is not None and not df.empty:
+                # Convert DataFrame to list of records in same format as parse_raw_line
+                for _, row in df.iterrows():
+                    record = {
+                        "timestamp": pd.to_datetime(row['timestamp']),
+                        "instrument": row['instrument'],
+                        "bid": float(row['bid']),
+                        "ask": float(row['ask']),
+                        "mid": (float(row['bid']) + float(row['ask'])) / 2,
+                        "spread": float(row['ask']) - float(row['bid']),
+                        "source": "live"
+                    }
+                    all_records.append(record)
+
+        io.close()
+        return all_records
+    except ImportError as e:
+        print(f"Failed to import DataIOv2: {e}")
+        return []
+    except Exception as e:
+        print(f"Error loading logs from MongoDB: {e}")
+        return []
+
+
 def process_raw_file(input_file, parquet_dir=PARQUET_DIR, source="live"):
     # Read and parse input file
     records = []
@@ -100,7 +99,7 @@ def process_raw_file(input_file, parquet_dir=PARQUET_DIR, source="live"):
     df = df.dropna(subset=["timestamp"])
     if len(df) < initial_count:
         print(f"  Dropped {initial_count - len(df)} records with invalid timestamps")
-    
+
     # Optimize data types
     df["instrument"] = df["instrument"].astype("category")
     df["source"] = df["source"].astype("category")
@@ -112,30 +111,83 @@ def process_raw_file(input_file, parquet_dir=PARQUET_DIR, source="live"):
     # This maintains data continuity for live trading scenarios
     for instrument, group in df.groupby("instrument"):
         output_file = parquet_dir / f"{instrument}.parquet"
-        
+
         # Append to existing data if file exists
         if output_file.exists():
             existing = pd.read_parquet(output_file, engine="pyarrow")
             group = pd.concat([existing, group], ignore_index=True)
-        
+
         # Ensure data consistency
         group = group.sort_values("timestamp")
         group = group.drop_duplicates(subset=["timestamp", "instrument"])
-        
+
         # Save optimized parquet file
         group.to_parquet(output_file, engine="pyarrow", index=False)
         print(f"Saved {len(group)} unique records for {instrument} (sorted by timestamp)")
 
-def main():
-    raw_files = list(RAW_DIR.glob("*.log"))
-    if not raw_files:
-        print(f"No raw files found in {RAW_DIR}")
+
+def process_mongo_data(dates: List[str], parquet_dir=PARQUET_DIR, source="live"):
+    """Process HFD data from MongoDB and save to Parquet files."""
+    print(f"Loading HFD data from MongoDB for dates: {dates}")
+
+    # Load records from MongoDB
+    records = load_logs_from_mongo(dates)
+
+    if not records:
+        print("No valid records loaded from MongoDB")
         return
 
-    for file in raw_files:
-        print(f"Processing {file.name}...")
-        process_raw_file(file)
-        print(f"Finished {file.name}")
+    df = pd.DataFrame(records)
+
+    # Validate and convert timestamps
+    df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
+    initial_count = len(df)
+    df = df.dropna(subset=["timestamp"])
+    if len(df) < initial_count:
+        print(f"  Dropped {initial_count - len(df)} records with invalid timestamps")
+
+    # Optimize data types
+    df["instrument"] = df["instrument"].astype("category")
+    df["source"] = df["source"].astype("category")
+    for col in ["bid", "ask", "mid", "spread"]:
+        df[col] = df[col].astype("float32")
+
+    # Process each instrument separately
+    # NOTE: Using append mode for live data; historical data should overwrite
+    # This maintains data continuity for live trading scenarios
+    for instrument, group in df.groupby("instrument"):
+        output_file = parquet_dir / f"{instrument}.parquet"
+
+        # Append to existing data if file exists
+        if output_file.exists():
+            existing = pd.read_parquet(output_file, engine="pyarrow")
+            group = pd.concat([existing, group], ignore_index=True)
+
+        # Ensure data consistency
+        group = group.sort_values("timestamp")
+        group = group.drop_duplicates(subset=["timestamp", "instrument"])
+
+        # Save optimized parquet file
+        group.to_parquet(output_file, engine="pyarrow", index=False)
+        print(f"Saved {len(group)} unique records for {instrument} (sorted by timestamp)")
+
+
+def main():
+    if USE_MONGO:
+        print("Using MongoDB as data source...")
+        process_mongo_data(MONGO_DATES, PARQUET_DIR)
+    else:
+        print("Using local log files as data source...")
+        raw_files = list(RAW_DIR.glob("*.log"))
+        if not raw_files:
+            print(f"No raw files found in {RAW_DIR}")
+            return
+
+        for file in raw_files:
+            print(f"Processing {file.name}...")
+            process_raw_file(file)
+            print(f"Finished {file.name}")
+
 
 if __name__ == "__main__":
     main()
